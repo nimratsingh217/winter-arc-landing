@@ -273,6 +273,119 @@
       background: #4ae0cd;
     }
 
+    .btn-launch-web {
+      background: linear-gradient(135deg, rgba(14, 26, 44, 0.95), rgba(7, 14, 25, 0.95));
+      color: #e8ecf4;
+      border: 1.5px solid var(--accent);
+      box-shadow: 0 0 20px rgba(61, 214, 195, 0.2);
+      cursor: pointer;
+    }
+
+    .btn-launch-web:hover {
+      background: rgba(20, 42, 70, 0.95);
+      border-color: var(--accent-light);
+      color: #ffffff;
+      box-shadow: 0 0 30px rgba(61, 214, 195, 0.45);
+    }
+
+    .dual-launch-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .launch-btn-inner {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .launch-icon {
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .launch-text-wrap {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      line-height: 1.25;
+    }
+
+    .launch-main {
+      font-weight: 800;
+      font-size: 16px;
+      letter-spacing: 0.02em;
+    }
+
+    .launch-sub {
+      font-size: 11px;
+      opacity: 0.82;
+      font-weight: 500;
+    }
+
+    /* Modal for App Launch / Install Helper */
+    .app-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(3, 6, 12, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .app-modal-overlay.active {
+      display: flex;
+    }
+
+    .app-modal-card {
+      background: linear-gradient(180deg, #0e172a 0%, #070c18 100%);
+      border: 1px solid rgba(61, 214, 195, 0.4);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      max-width: 520px;
+      width: 100%;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.9), 0 0 40px -10px var(--accent-glow);
+      position: relative;
+      animation: modalFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.95) translateY(10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .app-modal-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--surface-border);
+      color: var(--text-muted);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      transition: all 0.2s;
+    }
+
+    .app-modal-close:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: var(--text);
+    }
+
     .btn-secondary {
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid var(--surface-border);
@@ -1288,8 +1401,11 @@
             <span id="sound-icon">🔊</span>
             <span id="sound-label">Sound Ambient</span>
           </button>
-          <a href="https://nimratsingh217.github.io/winter-arc/" target="_blank" rel="noopener noreferrer" class="btn-cta">
-            Launch Arc ↗
+          <button onclick="handleLaunchApp(event)" class="btn-cta btn-launch-app" style="padding: 8px 14px; font-size: 13px;">
+            ▲ Launch App
+          </button>
+          <a href="https://nimratsingh217.github.io/winter-arc/" target="_blank" rel="noopener noreferrer" class="btn-cta btn-launch-web" style="padding: 8px 14px; font-size: 13px;">
+            🌐 Launch Website
           </a>
         </div>
       </div>
@@ -1316,16 +1432,31 @@
         </p>
 
         <div class="hero-ctas">
-          <a href="https://nimratsingh217.github.io/winter-arc/" target="_blank" rel="noopener noreferrer" class="btn-cta" style="padding: 14px 32px; font-size: 16px;">
-            <span>▲ Enter The Winter Arc</span>
-            <span style="font-size: 14px; opacity: 0.8;">(Live App)</span>
+          <button onclick="handleLaunchApp(event)" class="btn-cta btn-launch-app" style="padding: 12px 26px;">
+            <div class="launch-btn-inner">
+              <span class="launch-icon">▲</span>
+              <div class="launch-text-wrap">
+                <span class="launch-main" style="font-size: 15px;">Launch App</span>
+                <span class="launch-sub">PWA / Standalone</span>
+              </div>
+            </div>
+          </button>
+
+          <a href="https://nimratsingh217.github.io/winter-arc/" target="_blank" rel="noopener noreferrer" class="btn-cta btn-launch-web" style="padding: 12px 26px;">
+            <div class="launch-btn-inner">
+              <span class="launch-icon">🌐</span>
+              <div class="launch-text-wrap">
+                <span class="launch-main" style="font-size: 15px;">Launch Website</span>
+                <span class="launch-sub">Open in Chrome Tab</span>
+              </div>
+            </div>
           </a>
 
-          <a href="https://github.com/nimratsingh217/winter-arc" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="padding: 14px 26px; font-size: 15px;">
+          <a href="https://github.com/nimratsingh217/winter-arc" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="padding: 12px 20px; font-size: 14px;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
             </svg>
-            <span>Star on GitHub</span>
+            <span>GitHub</span>
           </a>
         </div>
 
@@ -1829,12 +1960,37 @@
           <p>
             Nobody is watching. No one will do the reps or write the code for you. Enter the Winter Arc and see what you are truly capable of.
           </p>
-          <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
-            <a href="https://nimratsingh217.github.io/winter-arc/" target="_blank" rel="noopener noreferrer" class="btn-cta" style="padding: 16px 36px; font-size: 17px;">
-              ▲ Launch Winter Arc Tracker
+
+          <!-- Dual Launch Options -->
+          <div class="dual-launch-wrap">
+            <button onclick="handleLaunchApp(event)" class="btn-cta btn-launch-app" style="padding: 16px 34px;">
+              <div class="launch-btn-inner">
+                <span class="launch-icon">▲</span>
+                <div class="launch-text-wrap">
+                  <span class="launch-main" style="font-size: 17px;">Launch App</span>
+                  <span class="launch-sub">PWA / Standalone Window</span>
+                </div>
+              </div>
+            </button>
+
+            <a href="https://nimratsingh217.github.io/winter-arc/" target="_blank" rel="noopener noreferrer" class="btn-cta btn-launch-web" style="padding: 16px 34px;">
+              <div class="launch-btn-inner">
+                <span class="launch-icon">🌐</span>
+                <div class="launch-text-wrap">
+                  <span class="launch-main" style="font-size: 17px;">Launch Website</span>
+                  <span class="launch-sub">Use on Chrome Tab</span>
+                </div>
+              </div>
             </a>
-            <a href="https://github.com/nimratsingh217/winter-arc" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="padding: 16px 28px; font-size: 16px;">
-              View Code On GitHub
+          </div>
+
+          <!-- Secondary GitHub link -->
+          <div style="margin-top: 24px;">
+            <a href="https://github.com/nimratsingh217/winter-arc" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="padding: 10px 22px; font-size: 13px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+              </svg>
+              <span>View Source Code On GitHub</span>
             </a>
           </div>
         </div>
@@ -1844,10 +2000,78 @@
 
   <!-- Sticky Launch Pill -->
   <div id="sticky-bar" class="sticky-bar">
-    <span class="sticky-text">Start Your <em>Winter Arc</em> Now</span>
-    <a href="https://nimratsingh217.github.io/winter-arc/" target="_blank" rel="noopener noreferrer" class="btn-cta" style="padding: 8px 18px; font-size: 13px;">
-      Launch App ↗
+    <span class="sticky-text">Start Your <em>Winter Arc</em>:</span>
+    <button onclick="handleLaunchApp(event)" class="btn-cta btn-launch-app" style="padding: 7px 16px; font-size: 12px;">
+      ▲ Launch App
+    </button>
+    <a href="https://nimratsingh217.github.io/winter-arc/" target="_blank" rel="noopener noreferrer" class="btn-cta btn-launch-web" style="padding: 7px 16px; font-size: 12px;">
+      🌐 Launch Website
     </a>
+  </div>
+
+  <!-- App Launch / Install Helper Modal -->
+  <div id="app-modal" class="app-modal-overlay" onclick="handleOverlayClick(event)">
+    <div class="app-modal-card">
+      <button class="app-modal-close" onclick="closeAppModal()" title="Close">✕</button>
+      
+      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+        <div style="width: 42px; height: 42px; border-radius: 12px; background: rgba(61, 214, 195, 0.15); border: 1px solid var(--accent); display: flex; align-items: center; justify-content: center; color: var(--accent); font-weight: 900; font-size: 20px;">
+          ▲
+        </div>
+        <div>
+          <h3 style="font-size: 18px; font-weight: 800; color: var(--text);">Launch 90-Day Winter Arc</h3>
+          <p style="font-size: 12px; color: var(--text-muted);">Choose your preferred launch mode</p>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 14px; margin-top: 16px;">
+        
+        <!-- Standalone Window Option -->
+        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--surface-border); border-radius: var(--radius-md); padding: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <div style="font-size: 14px; font-weight: 700; color: var(--text);">
+              🖥️ Standalone App Window
+            </div>
+            <span style="font-size: 10px; font-family: var(--font-mono); color: var(--accent); background: var(--accent-dim); padding: 2px 8px; border-radius: 4px;">Zero Clutter</span>
+          </div>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.5;">
+            Launches in a dedicated chromeless window without browser tabs or URL bars for pure monk-mode focus.
+          </p>
+          <button onclick="openStandaloneApp()" class="btn-cta" style="width: 100%; justify-content: center; padding: 10px; font-size: 13px;">
+            Open Standalone Window ↗
+          </button>
+        </div>
+
+        <!-- Install PWA Instructions -->
+        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--surface-border); border-radius: var(--radius-md); padding: 16px;">
+          <div style="font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 8px;">
+            📱 Install as Native App to Dock / Home Screen
+          </div>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 12px; color: var(--text-muted);">
+            <li style="display: flex; align-items: flex-start; gap: 8px;">
+              <span style="color: var(--accent);">•</span>
+              <span><strong>Google Chrome (Desktop):</strong> Click the <strong>Install</strong> icon (⊕) on the right side of Chrome's address bar.</span>
+            </li>
+            <li style="display: flex; align-items: flex-start; gap: 8px;">
+              <span style="color: var(--accent);">•</span>
+              <span><strong>iPhone / iPad (Safari):</strong> Tap the <strong>Share</strong> button (□↑) and choose <strong>"Add to Home Screen"</strong>.</span>
+            </li>
+            <li style="display: flex; align-items: flex-start; gap: 8px;">
+              <span style="color: var(--accent);">•</span>
+              <span><strong>Android (Chrome):</strong> Tap the <strong>3 dots (⋮)</strong> and tap <strong>"Install App"</strong>.</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Or open in browser -->
+        <div style="text-align: center; margin-top: 4px;">
+          <a href="https://nimratsingh217.github.io/winter-arc/" target="_blank" rel="noopener noreferrer" style="font-size: 12px; color: var(--accent); text-decoration: none; font-weight: 600;">
+            Or launch website directly in Chrome tab ↗
+          </a>
+        </div>
+
+      </div>
+    </div>
   </div>
 
   <!-- Footer -->
@@ -2274,6 +2498,66 @@
 
       requestAnimationFrame(renderSnow);
     }
+
+    /* ==========================================================================
+       App Launch & Installation Controller
+       ========================================================================== */
+    let deferredPrompt = null;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+    });
+
+    const appModal = document.getElementById('app-modal');
+
+    function handleLaunchApp(e) {
+      if (e) e.preventDefault();
+      
+      // If native PWA install prompt is available, trigger it
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            deferredPrompt = null;
+          } else {
+            openAppModal();
+          }
+        });
+      } else {
+        openAppModal();
+      }
+    }
+
+    function openAppModal() {
+      if (appModal) appModal.classList.add('active');
+    }
+
+    function closeAppModal() {
+      if (appModal) appModal.classList.remove('active');
+    }
+
+    function handleOverlayClick(e) {
+      if (e.target === appModal) {
+        closeAppModal();
+      }
+    }
+
+    function openStandaloneApp() {
+      closeAppModal();
+      const url = 'https://nimratsingh217.github.io/winter-arc/';
+      const win = window.open(
+        url,
+        'WinterArcPWA',
+        'width=1280,height=850,menubar=no,toolbar=no,location=no,status=no,resizable=yes,scrollbars=yes'
+      );
+      if (!win) {
+        window.open(url, '_blank');
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeAppModal();
+    });
   </script>
 </body>
 </html>
