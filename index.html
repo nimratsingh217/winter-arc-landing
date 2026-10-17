@@ -1,0 +1,2279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>90-Day Winter Arc — Personal Transformation Protocol</title>
+  <meta name="description" content="The definitive, privacy-first personal transformation tracker. 90 days of relentless discipline across Nutrition, Gym, Hygiene, Mind, and DSA with ambient soundscapes and 3D summit visuals.">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="90-Day Winter Arc — Personal Transformation Protocol">
+  <meta property="og:description" content="Lock in for 90 days. 5 core pillars, generative procedural audio, dynamic 3D mountain summit, and 100% offline privacy.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nimratsingh217.github.io/winter-arc/">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #050811;
+      --bg-alt: #0a101d;
+      --surface: #0e1626;
+      --surface-border: #1a273e;
+      --surface-hover: #141f36;
+      --accent: #3dd6c3;
+      --accent-glow: rgba(61, 214, 195, 0.35);
+      --accent-dim: rgba(61, 214, 195, 0.12);
+      --accent-light: #7fe9ff;
+      --text: #e8ecf4;
+      --text-muted: #8d97a9;
+      --text-dim: #5a667d;
+      --crimson: #ff4766;
+      --gold: #f59e0b;
+      --purple: #a855f7;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 22px;
+      --radius-full: 9999px;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --container: 1180px;
+    }
+
+    [data-theme="crimson"] {
+      --accent: #ff4766;
+      --accent-glow: rgba(255, 71, 102, 0.35);
+      --accent-dim: rgba(255, 71, 102, 0.12);
+      --accent-light: #ffa1b2;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-color: var(--bg);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Ambient Canvas Background */
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.65;
+    }
+
+    .ambient-glow {
+      position: fixed;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 600px;
+      background: radial-gradient(ellipse at center, rgba(61, 214, 195, 0.15) 0%, rgba(13, 22, 38, 0) 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+
+    .accent-text {
+      color: var(--accent);
+      text-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 30%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .mono {
+      font-family: var(--font-mono);
+    }
+
+    /* Header Nav */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(5, 8, 17, 0.75);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      transition: all 0.3s ease;
+    }
+
+    .nav-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(61, 214, 195, 0.2), rgba(61, 214, 195, 0.05));
+      border: 1px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-weight: 900;
+      font-size: 17px;
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+
+    .brand-name {
+      font-weight: 800;
+      font-size: 17px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-name em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      .brand-name {
+        font-size: 14px;
+      }
+      .btn-sound span#sound-label {
+        display: none;
+      }
+      .btn-sound {
+        padding: 8px 10px;
+      }
+      .btn-cta {
+        padding: 8px 14px;
+        font-size: 13px;
+      }
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-sound {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--surface-border);
+      color: var(--text-muted);
+      padding: 8px 14px;
+      border-radius: var(--radius-full);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-sound:hover {
+      color: var(--text);
+      border-color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    .btn-sound.playing {
+      color: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 0 12px var(--accent-glow);
+    }
+
+    .btn-cta {
+      background: var(--accent);
+      color: #050811;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.02em;
+      padding: 10px 20px;
+      border-radius: var(--radius-full);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 0 20px var(--accent-glow);
+      border: 1px solid var(--accent-light);
+    }
+
+    .btn-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px rgba(61, 214, 195, 0.6);
+      background: #4ae0cd;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--surface-border);
+      color: var(--text);
+      font-weight: 600;
+      font-size: 14px;
+      padding: 10px 20px;
+      border-radius: var(--radius-full);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: var(--surface-hover);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-1px);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 90px 0 80px;
+      text-align: center;
+      position: relative;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: var(--radius-full);
+      background: rgba(61, 214, 195, 0.08);
+      border: 1px solid rgba(61, 214, 195, 0.25);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      box-shadow: 0 0 15px rgba(61, 214, 195, 0.1);
+    }
+
+    .badge-pill span.pulse {
+      width: 7px;
+      height: 7px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: inline-block;
+      box-shadow: 0 0 8px var(--accent);
+      animation: pulseAnim 2s infinite;
+    }
+
+    @keyframes pulseAnim {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.3); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+
+    .hero-title {
+      font-size: clamp(40px, 6.5vw, 76px);
+      letter-spacing: -0.04em;
+      font-weight: 900;
+      margin-bottom: 24px;
+      line-height: 1.05;
+      text-transform: uppercase;
+    }
+
+    .hero-sub {
+      font-size: clamp(16px, 2vw, 20px);
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto 36px;
+      line-height: 1.6;
+    }
+
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero-stat-item {
+      text-align: center;
+    }
+
+    .hero-stat-val {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--accent);
+      font-family: var(--font-mono);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .hero-stat-lbl {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    /* Live Interactive Hero App Preview */
+    .app-preview-wrap {
+      margin: 40px auto 0;
+      max-width: 980px;
+      position: relative;
+    }
+
+    .preview-card {
+      background: linear-gradient(180deg, #0d1526 0%, #080c16 100%);
+      border: 1px solid rgba(61, 214, 195, 0.25);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 40px -10px var(--accent-glow);
+      position: relative;
+      overflow: hidden;
+      text-align: left;
+    }
+
+    .preview-card-glow {
+      position: absolute;
+      top: 0;
+      left: 15%;
+      width: 70%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    }
+
+    .preview-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--surface-border);
+      margin-bottom: 20px;
+    }
+
+    .preview-title {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .preview-title em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .preview-tags {
+      display: flex;
+      gap: 12px;
+    }
+
+    .preview-tag {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .preview-tag.live {
+      color: var(--accent);
+      background: var(--accent-dim);
+      border-color: rgba(61, 214, 195, 0.3);
+    }
+
+    /* Interactive Demo Grid Inside Card */
+    .interactive-demo {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    @media (max-width: 820px) {
+      .interactive-demo {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .checklist-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .checklist-items {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .check-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--surface-border);
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.2s;
+      user-select: none;
+    }
+
+    .check-row:hover {
+      background: rgba(61, 214, 195, 0.06);
+      border-color: rgba(61, 214, 195, 0.3);
+    }
+
+    .check-row.checked {
+      background: rgba(61, 214, 195, 0.12);
+      border-color: var(--accent);
+    }
+
+    .check-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .check-pill {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .pill-nutrition { background: rgba(47, 209, 176, 0.15); color: #2fd1b0; }
+    .pill-gym { background: rgba(74, 222, 128, 0.15); color: #4ade80; }
+    .pill-hygiene { background: rgba(91, 140, 255, 0.15); color: #5b8cff; }
+    .pill-mind { background: rgba(176, 124, 255, 0.15); color: #b07cff; }
+    .pill-skill { background: rgba(255, 107, 139, 0.15); color: #ff6b8b; }
+
+    .check-box {
+      width: 20px;
+      height: 20px;
+      border-radius: 5px;
+      border: 2px solid var(--text-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      color: transparent;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .check-row.checked .check-box {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #050811;
+      box-shadow: 0 0 10px var(--accent-glow);
+    }
+
+    /* Right column: Status Display */
+    .status-panel {
+      background: rgba(5, 8, 17, 0.6);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .status-score-ring {
+      width: 120px;
+      height: 120px;
+      position: relative;
+      margin-bottom: 16px;
+    }
+
+    .status-score-ring svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .status-score-ring circle.bg {
+      stroke: var(--surface-border);
+      fill: none;
+      stroke-width: 8;
+    }
+
+    .status-score-ring circle.progress {
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 8;
+      stroke-linecap: round;
+      stroke-dasharray: 339;
+      stroke-dashoffset: 339;
+      transition: stroke-dashoffset 0.4s ease;
+      filter: drop-shadow(0 0 6px var(--accent));
+    }
+
+    .status-score-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 26px;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      color: var(--text);
+    }
+
+    .status-score-text span {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .status-badge {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      transition: all 0.3s;
+    }
+
+    .status-badge.solid {
+      background: rgba(61, 214, 195, 0.2);
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+
+    .status-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .preview-bottom-bar {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--surface-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .preview-live-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .preview-live-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Section Styles */
+    section {
+      padding: 90px 0;
+      position: relative;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 60px;
+    }
+
+    .section-eyebrow {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+
+    .section-title {
+      font-size: clamp(30px, 4vw, 44px);
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Philosophy / Contrast Section */
+    .contrast-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      .contrast-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .contrast-card {
+      padding: 32px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--surface-border);
+      background: var(--surface);
+    }
+
+    .contrast-card.bad {
+      background: rgba(26, 17, 24, 0.4);
+      border-color: rgba(255, 71, 102, 0.2);
+    }
+
+    .contrast-card.good {
+      background: linear-gradient(180deg, rgba(14, 26, 38, 0.8) 0%, rgba(9, 16, 26, 0.9) 100%);
+      border-color: rgba(61, 214, 195, 0.4);
+      box-shadow: 0 0 30px rgba(61, 214, 195, 0.08);
+      position: relative;
+    }
+
+    .contrast-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .contrast-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .contrast-card.bad .contrast-icon {
+      background: rgba(255, 71, 102, 0.15);
+      color: var(--crimson);
+    }
+
+    .contrast-card.good .contrast-icon {
+      background: var(--accent-dim);
+      color: var(--accent);
+      box-shadow: 0 0 12px var(--accent-glow);
+    }
+
+    .contrast-title {
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .contrast-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .contrast-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .contrast-list li strong {
+      color: var(--text);
+    }
+
+    .contrast-card.good .contrast-list li {
+      color: #cfd8e8;
+    }
+
+    /* 3 Phases of Winter Arc */
+    .phases-wrap {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      position: relative;
+    }
+
+    @media (max-width: 900px) {
+      .phases-wrap {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .phase-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius-md);
+      padding: 30px 24px;
+      position: relative;
+      transition: all 0.3s;
+    }
+
+    .phase-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(61, 214, 195, 0.4);
+      box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.6);
+    }
+
+    .phase-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+    }
+
+    .phase-1 .phase-badge { background: rgba(47, 209, 176, 0.15); color: #2fd1b0; }
+    .phase-2 .phase-badge { background: rgba(91, 140, 255, 0.15); color: #5b8cff; }
+    .phase-3 .phase-badge { background: rgba(255, 71, 102, 0.15); color: #ff6b8b; }
+
+    .phase-name {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .phase-dates {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .phase-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* 5 Pillars Section */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 20px;
+    }
+
+    .pillar-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius-md);
+      padding: 26px 20px;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pillar-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--p-color, var(--accent));
+      opacity: 0.8;
+    }
+
+    .pillar-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--p-color, var(--accent));
+      box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.6);
+    }
+
+    .pillar-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 18px;
+      border: 1px solid var(--surface-border);
+    }
+
+    .pillar-title {
+      font-size: 17px;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .pillar-target {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--p-color, var(--accent));
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    .pillar-body {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* Innovation / Showcase Cards */
+    .features-showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+
+    @media (max-width: 860px) {
+      .features-showcase {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .showcase-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .showcase-card.featured {
+      grid-column: 1 / -1;
+      background: linear-gradient(135deg, rgba(14, 22, 38, 0.9) 0%, rgba(8, 12, 22, 0.95) 100%);
+      border-color: rgba(61, 214, 195, 0.35);
+    }
+
+    .showcase-eyebrow {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .showcase-title {
+      font-size: 24px;
+      margin-bottom: 14px;
+    }
+
+    .showcase-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .showcase-visual {
+      background: #060912;
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      position: relative;
+      min-height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Canvas Mountain Summit Simulator in Showcase */
+    #summit-canvas {
+      width: 100%;
+      height: 240px;
+      display: block;
+      cursor: crosshair;
+    }
+
+    .summit-controls {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      pointer-events: none;
+    }
+
+    .summit-pill {
+      background: rgba(5, 8, 17, 0.85);
+      border: 1px solid rgba(61, 214, 195, 0.3);
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      font-size: 11px;
+      font-family: var(--font-mono);
+      color: var(--accent-light);
+      backdrop-filter: blur(8px);
+    }
+
+    /* Mini Stopwatch widget */
+    .stopwatch-widget {
+      padding: 24px;
+      text-align: center;
+      width: 100%;
+    }
+
+    .stopwatch-clock {
+      font-size: 42px;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      margin-bottom: 14px;
+      text-shadow: 0 0 15px var(--accent-glow);
+    }
+
+    .stopwatch-btns {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .btn-sw {
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 6px 18px;
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-sw:hover {
+      background: var(--accent);
+      color: #050811;
+    }
+
+    /* Dual Ergonomics Section */
+    .ergonomics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    @media (max-width: 820px) {
+      .ergonomics-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .ergo-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius-lg);
+      padding: 36px 30px;
+    }
+
+    .ergo-pill {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 4px;
+      background: var(--accent-dim);
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    /* FAQ Accordion */
+    .faq-wrap {
+      max-width: 780px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+
+    .faq-item:hover {
+      border-color: rgba(61, 214, 195, 0.3);
+    }
+
+    .faq-question {
+      padding: 20px 24px;
+      font-size: 16px;
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .faq-chevron {
+      color: var(--accent);
+      font-size: 18px;
+      transition: transform 0.3s;
+    }
+
+    .faq-item.active .faq-chevron {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      padding: 0 24px 20px;
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      display: none;
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    /* Final CTA Banner */
+    .cta-banner {
+      background: radial-gradient(circle at 50% 0%, rgba(61, 214, 195, 0.22) 0%, rgba(14, 22, 38, 0.8) 70%);
+      border: 1px solid rgba(61, 214, 195, 0.4);
+      border-radius: var(--radius-lg);
+      padding: 70px 32px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 60px -20px var(--accent-glow);
+      margin-bottom: 80px;
+    }
+
+    .cta-banner h2 {
+      font-size: clamp(32px, 5vw, 54px);
+      letter-spacing: -0.04em;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+
+    .cta-banner p {
+      font-size: clamp(16px, 2vw, 19px);
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 36px;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--surface-border);
+      padding: 48px 0;
+      color: var(--text-muted);
+      font-size: 13px;
+      background: #03050a;
+    }
+
+    .footer-wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-quote {
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+
+    .footer-quote em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    /* Sticky Bottom Bar on Mobile/Desktop */
+    .sticky-bar {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(120px);
+      z-index: 99;
+      background: rgba(14, 22, 38, 0.85);
+      border: 1px solid rgba(61, 214, 195, 0.4);
+      padding: 10px 18px;
+      border-radius: var(--radius-full);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 20px var(--accent-glow);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .sticky-bar.visible {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .sticky-text {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .sticky-text em {
+      font-style: normal;
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Canvas Background -->
+  <canvas id="bg-canvas"></canvas>
+  <div class="ambient-glow"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="nav-wrap">
+        <a href="https://nimratsingh217.github.io/winter-arc/" target="_blank" rel="noopener noreferrer" class="brand">
+          <div class="brand-icon">▲</div>
+          <span class="brand-name">90-DAY <em>WINTER ARC</em></span>
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pillars">5 Pillars</a></li>
+          <li><a href="#visuals">3D Summit</a></li>
+          <li><a href="#ergonomics">PWA & Print</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <button id="sound-btn" class="btn-sound" title="Toggle procedural ambient soundscape">
+            <span id="sound-icon">🔊</span>
+            <span id="sound-label">Sound Ambient</span>
+          </button>
+          <a href="https://nimratsingh217.github.io/winter-arc/" target="_blank" rel="noopener noreferrer" class="btn-cta">
+            Launch Arc ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main>
+    <section class="hero">
+      <div class="container">
+        
+        <div class="badge-pill">
+          <span class="pulse"></span>
+          90-Day Discipline Protocol · 100% Free & Open Source
+        </div>
+
+        <h1 class="hero-title">
+          90 Days In The Dark.<br>
+          <span class="accent-text">Emerge Unrecognizable.</span>
+        </h1>
+
+        <p class="hero-sub">
+          When the cold sets in, the weak hibernate. The disciplined build. Track five relentless pillars — Nutrition, Gym, Hygiene, Mind, and DSA — wrapped in procedural ambient audio, 3D summit visualizations, and absolute local privacy.
+        </p>
+
+        <div class="hero-ctas">
+          <a href="https://nimratsingh217.github.io/winter-arc/" target="_blank" rel="noopener noreferrer" class="btn-cta" style="padding: 14px 32px; font-size: 16px;">
+            <span>▲ Enter The Winter Arc</span>
+            <span style="font-size: 14px; opacity: 0.8;">(Live App)</span>
+          </a>
+
+          <a href="https://github.com/nimratsingh217/winter-arc" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="padding: 14px 26px; font-size: 15px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+            <span>Star on GitHub</span>
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="hero-stat-item">
+            <span class="hero-stat-val">90</span>
+            <span class="hero-stat-lbl">Days Protocol</span>
+          </div>
+          <div class="hero-stat-item">
+            <span class="hero-stat-val">5</span>
+            <span class="hero-stat-lbl">Core Pillars</span>
+          </div>
+          <div class="hero-stat-item">
+            <span class="hero-stat-val">100%</span>
+            <span class="hero-stat-lbl">Offline & Private</span>
+          </div>
+          <div class="hero-stat-item">
+            <span class="hero-stat-val">$0</span>
+            <span class="hero-stat-lbl">Free Forever</span>
+          </div>
+        </div>
+
+        <!-- Interactive Hero Card Preview -->
+        <div class="app-preview-wrap">
+          <div class="preview-card">
+            <div class="preview-card-glow"></div>
+            
+            <div class="preview-header">
+              <div class="preview-title">
+                Interactive Protocol Preview · <em>Try It Now</em>
+              </div>
+              <div class="preview-tags">
+                <span class="preview-tag live">● Live Interactive Demo</span>
+                <span class="preview-tag">Day 1 / 90</span>
+              </div>
+            </div>
+
+            <div class="interactive-demo">
+              <!-- Left: Checklist -->
+              <div>
+                <div class="checklist-title">
+                  <span>Daily Execution Checklist</span>
+                  <span id="checked-counter" class="mono" style="color: var(--accent);">0 / 8 Complete</span>
+                </div>
+
+                <div class="checklist-items" id="demo-checklist">
+                  <div class="check-row" data-target="0">
+                    <div class="check-label">
+                      <span class="check-pill pill-nutrition">Nutrition</span>
+                      <span>Overnight Oats & High-Protein Fuel</span>
+                    </div>
+                    <div class="check-box">✓</div>
+                  </div>
+
+                  <div class="check-row" data-target="1">
+                    <div class="check-label">
+                      <span class="check-pill pill-nutrition">Fuel</span>
+                      <span>Hit 100g+ Protein & 2.5–3L Water</span>
+                    </div>
+                    <div class="check-box">✓</div>
+                  </div>
+
+                  <div class="check-row" data-target="2">
+                    <div class="check-label">
+                      <span class="check-pill pill-gym">Gym</span>
+                      <span>Heavy Training Session / Active Recovery</span>
+                    </div>
+                    <div class="check-box">✓</div>
+                  </div>
+
+                  <div class="check-row" data-target="3">
+                    <div class="check-label">
+                      <span class="check-pill pill-hygiene">Hygiene</span>
+                      <span>AM Facewash + SPF & PM Recovery</span>
+                    </div>
+                    <div class="check-box">✓</div>
+                  </div>
+
+                  <div class="check-row" data-target="4">
+                    <div class="check-label">
+                      <span class="check-pill pill-mind">Focus</span>
+                      <span>Dopamine Detox & Mind Discipline (No Fap)</span>
+                    </div>
+                    <div class="check-box">✓</div>
+                  </div>
+
+                  <div class="check-row" data-target="5">
+                    <div class="check-label">
+                      <span class="check-pill pill-skill">Career</span>
+                      <span>1 Significant Career / High-Leverage Move</span>
+                    </div>
+                    <div class="check-box">✓</div>
+                  </div>
+
+                  <div class="check-row" data-target="6">
+                    <div class="check-label">
+                      <span class="check-pill pill-skill">DSA</span>
+                      <span>Solve LeetCode / Grinding Algorithms</span>
+                    </div>
+                    <div class="check-box">✓</div>
+                  </div>
+
+                  <div class="check-row" data-target="7">
+                    <div class="check-label">
+                      <span class="check-pill pill-hygiene">Night</span>
+                      <span>2-Minute Night Dental Care & Shut Down</span>
+                    </div>
+                    <div class="check-box">✓</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right: Score Ring & Feedback -->
+              <div class="status-panel">
+                <div class="status-score-ring">
+                  <svg viewBox="0 0 120 120">
+                    <circle class="bg" cx="60" cy="60" r="54"></circle>
+                    <circle id="demo-progress-circle" class="progress" cx="60" cy="60" r="54"></circle>
+                  </svg>
+                  <div class="status-score-text">
+                    <span id="demo-percentage">0</span>%
+                  </div>
+                </div>
+
+                <div id="demo-status-badge" class="status-badge">
+                  Incomplete Day
+                </div>
+
+                <p id="demo-status-desc" class="status-desc">
+                  Tap tasks above to simulate your daily log. Reach 75%+ to trigger a <strong>SOLID DAY</strong> victory state.
+                </p>
+              </div>
+            </div>
+
+            <div class="preview-bottom-bar">
+              <div>
+                💡 <em>"Consistency over perfection. Miss a day, never miss twice."</em>
+              </div>
+              <a href="https://nimratsingh217.github.io/winter-arc/" target="_blank" rel="noopener noreferrer" class="preview-live-link">
+                Open full 90-day tracker in app →
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- The Winter Arc Philosophy: Contrast -->
+    <section id="features">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">The Manifesto</span>
+          <h2 class="section-title">Built For The Relentless Few</h2>
+          <p class="section-subtitle">
+            Most habit trackers treat discipline like a software subscription. Winter Arc treats it like a winter campaign.
+          </p>
+        </div>
+
+        <div class="contrast-grid">
+          <div class="contrast-card bad">
+            <div class="contrast-header">
+              <div class="contrast-icon">✕</div>
+              <div class="contrast-title">Typical Habit Apps</div>
+            </div>
+            <ul class="contrast-list">
+              <li>
+                <span>⚠️</span>
+                <span><strong>$15/Month Subscriptions</strong> — Pay-walled basic streak counters and arbitrary feature locks.</span>
+              </li>
+              <li>
+                <span>⚠️</span>
+                <span><strong>Account Creation & Surveillance</strong> — Demands your email, sends marketing spam, sells behavior data.</span>
+              </li>
+              <li>
+                <span>⚠️</span>
+                <span><strong>No Finite Finish Line</strong> — Endless open-ended loops with zero urgency or seasonal crystallization.</span>
+              </li>
+              <li>
+                <span>⚠️</span>
+                <span><strong>Passive & Distracting</strong> — Overloaded with gamified badges, social feeds, and intrusive notification bells.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="contrast-card good">
+            <div class="contrast-header">
+              <div class="contrast-icon">✓</div>
+              <div class="contrast-title">The 90-Day Winter Arc</div>
+            </div>
+            <ul class="contrast-list">
+              <li>
+                <span>🛡️</span>
+                <span><strong>100% Free & Open Source</strong> — No subscriptions, no ads, no microtransactions ever.</span>
+              </li>
+              <li>
+                <span>🔒</span>
+                <span><strong>Zero Sign-In & Offline LocalStorage</strong> — Your photos and metrics never leave your device.</span>
+              </li>
+              <li>
+                <span>⏳</span>
+                <span><strong>Fixed 90-Day Campaign</strong> — 3 sharp 30-day phases designed to produce an undeniable physical & mental shift.</span>
+              </li>
+              <li>
+                <span>🏔️</span>
+                <span><strong>Built-In Audio & 3D Atmosphere</strong> — Web Audio generative drone, DSA stopwatch, and dynamic 3D mountain summit.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 Phases Section -->
+    <section style="background: rgba(10, 16, 29, 0.4);">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">The Campaign Timeline</span>
+          <h2 class="section-title">Three Phases of Metamorphosis</h2>
+          <p class="section-subtitle">
+            A structured 90-day trajectory. Break bad loops in Foundation, build heavy momentum, and peak into the new year.
+          </p>
+        </div>
+
+        <div class="phases-wrap">
+          <div class="phase-card phase-1">
+            <span class="phase-badge">Phase 01</span>
+            <h3 class="phase-name">Foundation</h3>
+            <span class="phase-dates">Days 1 – 30</span>
+            <p class="phase-desc">
+              Shatter inertia. Eliminate dopamine distractions, enforce strict wake-up hours, establish gut-level nutrition routines, and train consistently without excuse.
+            </p>
+          </div>
+
+          <div class="phase-card phase-2">
+            <span class="phase-badge">Phase 02</span>
+            <h3 class="phase-name">Build</h3>
+            <span class="phase-dates">Days 31 – 60</span>
+            <p class="phase-desc">
+              Compounding velocity. Progressive overload in the weight room, deep-work flow state during DSA study, and visible physical changes begin taking shape.
+            </p>
+          </div>
+
+          <div class="phase-card phase-3">
+            <span class="phase-badge">Phase 03</span>
+            <h3 class="phase-name">Peak</h3>
+            <span class="phase-dates">Days 61 – 90</span>
+            <p class="phase-desc">
+              The summit approach. Total mental fortitude, shredded body composition, career and code breakthroughs, emerging completely unrecognizable on New Year's Day.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 Pillars Section -->
+    <section id="pillars">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Non-Negotiable Fundamentals</span>
+          <h2 class="section-title">The 5 Core Pillars</h2>
+          <p class="section-subtitle">
+            Every day is evaluated against 12 precise metrics structured under 5 timeless pillars of masculine development.
+          </p>
+        </div>
+
+        <div class="pillars-grid">
+          <div class="pillar-card" style="--p-color: #2fd1b0;">
+            <div class="pillar-icon">🥗</div>
+            <h3 class="pillar-title">Nutrition & Fuel</h3>
+            <div class="pillar-target">2,500 kcal · 100g+ Protein</div>
+            <p class="pillar-body">
+              Structured breakfast, whole-food lunch, pre-workout timing, and minimum 2.5–3 liters of water daily.
+            </p>
+          </div>
+
+          <div class="pillar-card" style="--p-color: #4ade80;">
+            <div class="pillar-icon">🏋️</div>
+            <h3 class="pillar-title">Gym & Rest</h3>
+            <div class="pillar-target">4–5× Lifting / Week</div>
+            <p class="pillar-body">
+              Heavy resistance training. Tap for completed gym session; hold for 1 second to log scheduled active recovery.
+            </p>
+          </div>
+
+          <div class="pillar-card" style="--p-color: #5b8cff;">
+            <div class="pillar-icon">✨</div>
+            <h3 class="pillar-title">Skin & Grooming</h3>
+            <div class="pillar-target">AM / PM Routine + Dental</div>
+            <p class="pillar-body">
+              Morning facewash, Vitamin C, moisturizer and SPF. Post-workout face cleanse and 2-minute nightly dental discipline.
+            </p>
+          </div>
+
+          <div class="pillar-card" style="--p-color: #b07cff;">
+            <div class="pillar-icon">🧠</div>
+            <h3 class="pillar-title">Mind & Focus</h3>
+            <div class="pillar-target">Dopamine Mastery (No Fap)</div>
+            <p class="pillar-body">
+              Protect your sexual energy and dopamine receptors. Clear mental fog, heighten drive, and refuse cheap short-term pleasure.
+            </p>
+          </div>
+
+          <div class="pillar-card" style="--p-color: #ff6b8b;">
+            <div class="pillar-icon">⚡</div>
+            <h3 class="pillar-title">Skills & DSA</h3>
+            <div class="pillar-target">1 Move + LeetCode Timer</div>
+            <p class="pillar-body">
+              One career-compounding victory daily plus active algorithm problem solving with the built-in precision stopwatch.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Innovation & Standout Features Showcase -->
+    <section id="visuals" style="background: rgba(10, 16, 29, 0.4);">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Beyond Ordinary Trackers</span>
+          <h2 class="section-title">Unique Atmospheric Engineering</h2>
+          <p class="section-subtitle">
+            Crafted with custom 3D canvas rendering, Web Audio synthesis, and private IndexedDB photo streams.
+          </p>
+        </div>
+
+        <div class="features-showcase">
+          
+          <!-- Summit 3D Visualizer -->
+          <div class="showcase-card featured">
+            <div>
+              <span class="showcase-eyebrow">Canvas 3D Engine · Weather Linked to Consistency</span>
+              <h3 class="showcase-title">The Summit & City Dynamic Visualizers</h3>
+              <p class="showcase-desc">
+                Your discipline is mirrored in real time. When your streaks and solid days are high, the mountain summit clears into a crisp alpine sunrise. Fall behind, and a heavy blizzard rolls over the peak. Built entirely in lightweight procedural canvas without heavy 3D frameworks.
+              </p>
+            </div>
+
+            <div class="showcase-visual">
+              <canvas id="summit-canvas"></canvas>
+              <div class="summit-controls">
+                <span class="summit-pill">Move cursor to pan camera</span>
+                <span class="summit-pill" style="color: var(--accent);">▲ Summit Mode Live</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Flipbook Photo Stream -->
+          <div class="showcase-card">
+            <div>
+              <span class="showcase-eyebrow">Client-Side IndexedDB Vault</span>
+              <h3 class="showcase-title">The Flipbook Transformation Stream</h3>
+              <p class="showcase-desc">
+                Log weekly physique check-ins directly in the app. Photos are compressed and stored locally in your browser's IndexedDB. Review your physical transformation as an interactive dynamic stream, with 1-click JSON backup export.
+              </p>
+            </div>
+
+            <div class="showcase-visual" style="flex-direction: column; padding: 24px; text-align: center;">
+              <div style="font-size: 38px; margin-bottom: 10px;">📸</div>
+              <div style="font-weight: 700; font-size: 15px; margin-bottom: 6px;">Zero Cloud Uploads</div>
+              <div style="font-size: 12px; color: var(--text-muted); max-width: 280px;">
+                Your photos remain 100% on your device. Complete anonymity and privacy.
+              </div>
+            </div>
+          </div>
+
+          <!-- DSA Algorithm Stopwatch -->
+          <div class="showcase-card">
+            <div>
+              <span class="showcase-eyebrow">Dedicated Study Tool</span>
+              <h3 class="showcase-title">Integrated DSA Stopwatch</h3>
+              <p class="showcase-desc">
+                Stop juggling phone timers or separate websites. Launch your session, log algorithms solved, and track weekly cumulative study hours without leaving the protocol.
+              </p>
+            </div>
+
+            <div class="showcase-visual">
+              <div class="stopwatch-widget">
+                <div class="stopwatch-clock" id="demo-sw-clock">00:45:12</div>
+                <div class="stopwatch-btns">
+                  <button class="btn-sw" id="demo-sw-toggle">Start / Pause</button>
+                  <button class="btn-sw" id="demo-sw-reset" style="border-color: var(--surface-border); color: var(--text-muted);">Reset</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Ergonomics: Phone vs Print Sheet -->
+    <section id="ergonomics">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Dual Ergonomics</span>
+          <h2 class="section-title">Two Ways To Attack The Arc</h2>
+          <p class="section-subtitle">
+            Whether you live on your smartphone or prefer a physical printout pinned above your desk.
+          </p>
+        </div>
+
+        <div class="ergonomics-grid">
+          <div class="ergo-card">
+            <span class="ergo-pill">Mobile First PWA</span>
+            <h3 style="font-size: 24px; margin-bottom: 12px;">iOS & Android Native Feel</h3>
+            <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">
+              Add to Home Screen directly from Safari or Chrome. Instant tactile day navigation, quick-tap checkboxes, haptic-style sound confirmations, and full offline caching via Service Worker.
+            </p>
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: #cfd8e8;">
+              <li>✓ One-tap "Today" quick jump</li>
+              <li>✓ Swipe / button day navigation</li>
+              <li>✓ Dark / Light theme slider</li>
+            </ul>
+          </div>
+
+          <div class="ergo-card">
+            <span class="ergo-pill" style="background: rgba(91, 140, 255, 0.15); color: #5b8cff;">Print Ready</span>
+            <h3 style="font-size: 24px; margin-bottom: 12px;">Full A3 Landscape Wall Grid</h3>
+            <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">
+              Designed with tailored CSS <code>@media print</code> styles. Hit Print in your browser to generate a high-density, clean, monochrome 90-day checklist sheet to pin to your wall and tick with a physical pen.
+            </p>
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: #cfd8e8;">
+              <li>✓ Automatic landscape A3 pagination</li>
+              <li>✓ High-contrast ink optimization</li>
+              <li>✓ Complete 90-day view on a single sheet</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Got Questions?</span>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+        </div>
+
+        <div class="faq-wrap">
+          <div class="faq-item active">
+            <div class="faq-question">
+              <span>What exactly is the "Winter Arc"?</span>
+              <span class="faq-chevron">+</span>
+            </div>
+            <div class="faq-answer">
+              The Winter Arc is a seasonal mental model where you commit to 90 continuous days of disciplined self-improvement throughout late autumn and winter. While others slow down during the holidays, you cultivate intense focus across fitness, intellect, and career.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>Is it really 100% free with no hidden charges?</span>
+              <span class="faq-chevron">+</span>
+            </div>
+            <div class="faq-answer">
+              Yes, completely. There are no premium tiers, no recurring subscriptions, and no upsells. It is built as an open-source project by and for individuals striving for personal mastery.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>Where is my personal tracking data stored?</span>
+              <span class="faq-chevron">+</span>
+            </div>
+            <div class="faq-answer">
+              All checkbox logs, weight trends, and DSA progress are saved directly into your web browser's <code>localStorage</code>. Flipbook photos are stored inside <code>IndexedDB</code>. Nothing ever gets transmitted to any server. You can export a JSON backup at any time.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>How do I install it on my phone?</span>
+              <span class="faq-chevron">+</span>
+            </div>
+            <div class="faq-answer">
+              Open <strong>https://nimratsingh217.github.io/winter-arc/</strong> on your mobile browser. On iOS Safari, tap the Share icon and select <em>"Add to Home Screen"</em>. On Android Chrome, tap the three dots and select <em>"Install App"</em>. It will launch full-screen just like a native app.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>What happens if I miss a single day?</span>
+              <span class="faq-chevron">+</span>
+            </div>
+            <div class="faq-answer">
+              The core maxim of the Winter Arc is: <em>"Consistency over perfection. Miss a day, never miss twice."</em> Do not restart from Day 1. Accept the imperfect day, log it honestly, and lock back in the very next morning.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA Banner -->
+    <section>
+      <div class="container">
+        <div class="cta-banner">
+          <h2>Your 90 Days Begin Today.</h2>
+          <p>
+            Nobody is watching. No one will do the reps or write the code for you. Enter the Winter Arc and see what you are truly capable of.
+          </p>
+          <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
+            <a href="https://nimratsingh217.github.io/winter-arc/" target="_blank" rel="noopener noreferrer" class="btn-cta" style="padding: 16px 36px; font-size: 17px;">
+              ▲ Launch Winter Arc Tracker
+            </a>
+            <a href="https://github.com/nimratsingh217/winter-arc" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="padding: 16px 28px; font-size: 16px;">
+              View Code On GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Sticky Launch Pill -->
+  <div id="sticky-bar" class="sticky-bar">
+    <span class="sticky-text">Start Your <em>Winter Arc</em> Now</span>
+    <a href="https://nimratsingh217.github.io/winter-arc/" target="_blank" rel="noopener noreferrer" class="btn-cta" style="padding: 8px 18px; font-size: 13px;">
+      Launch App ↗
+    </a>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-wrap">
+        <div>
+          <span class="footer-quote">
+            <b>Consistency</b> Over Perfection. Miss A Day, <em>Never Miss Twice</em>.
+          </span>
+          <div style="margin-top: 6px; font-size: 12px; color: var(--text-dim);">
+            Created by <a href="https://github.com/nimratsingh217" target="_blank" rel="noopener noreferrer" style="color: var(--text-muted); text-decoration: none;">Nimrat Singh</a>. Open source under MIT license.
+          </div>
+        </div>
+
+        <ul class="footer-links">
+          <li><a href="https://nimratsingh217.github.io/winter-arc/" target="_blank" rel="noopener noreferrer">Live Tracker</a></li>
+          <li><a href="https://github.com/nimratsingh217/winter-arc" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* ==========================================================================
+       Interactive Hero Checklist & Solid Day Score Engine
+       ========================================================================== */
+    const checkRows = document.querySelectorAll('.check-row');
+    const checkedCounter = document.getElementById('checked-counter');
+    const demoProgressCircle = document.getElementById('demo-progress-circle');
+    const demoPercentage = document.getElementById('demo-percentage');
+    const demoStatusBadge = document.getElementById('demo-status-badge');
+    const demoStatusDesc = document.getElementById('demo-status-desc');
+
+    const TOTAL_CHECKS = checkRows.length;
+    let checkedCount = 0;
+
+    checkRows.forEach((row) => {
+      row.addEventListener('click', () => {
+        row.classList.toggle('checked');
+        updateDemoScore();
+        playTickSound(row.classList.contains('checked'));
+      });
+    });
+
+    function updateDemoScore() {
+      checkedCount = document.querySelectorAll('.check-row.checked').length;
+      checkedCounter.textContent = `${checkedCount} / ${TOTAL_CHECKS} Complete`;
+
+      const pct = Math.round((checkedCount / TOTAL_CHECKS) * 100);
+      demoPercentage.textContent = pct;
+
+      // Circle stroke-dashoffset: 339 is full circumference
+      const offset = 339 - (339 * pct) / 100;
+      demoProgressCircle.style.strokeDashoffset = offset;
+
+      if (pct >= 75) {
+        demoStatusBadge.textContent = '★ SOLID DAY ACHIEVED';
+        demoStatusBadge.className = 'status-badge solid';
+        demoStatusDesc.innerHTML = 'Outstanding execution. You crossed the 75% threshold to lock in a <strong>SOLID DAY</strong> on your 90-day board.';
+      } else if (pct >= 50) {
+        demoStatusBadge.textContent = 'Building Momentum';
+        demoStatusBadge.className = 'status-badge';
+        demoStatusDesc.innerHTML = 'Good progress. Check off ' + (Math.ceil(TOTAL_CHECKS * 0.75) - checkedCount) + ' more item(s) to convert this into a <strong>Solid Day</strong>.';
+      } else {
+        demoStatusBadge.textContent = 'Incomplete Day';
+        demoStatusBadge.className = 'status-badge';
+        demoStatusDesc.innerHTML = 'Tap tasks above to simulate your daily log. Reach 75%+ to trigger a <strong>SOLID DAY</strong> victory state.';
+      }
+    }
+
+    /* ==========================================================================
+       Web Audio API - Procedural Audio (Chimes & Ambient Soundscape)
+       ========================================================================== */
+    let audioCtx = null;
+    let isPlayingAmbient = false;
+    let ambientInterval = null;
+
+    function getAudioCtx() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function playTickSound(isChecked) {
+      try {
+        const ctx = getAudioCtx();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        const now = ctx.currentTime;
+        if (isChecked) {
+          // Upward cheerful chime
+          osc.frequency.setValueAtTime(440, now);
+          osc.frequency.exponentialRampToValueAtTime(880, now + 0.12);
+          gain.gain.setValueAtTime(0.12, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+        } else {
+          // Low tap
+          osc.frequency.setValueAtTime(320, now);
+          osc.frequency.exponentialRampToValueAtTime(220, now + 0.08);
+          gain.gain.setValueAtTime(0.08, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+        }
+
+        osc.start(now);
+        osc.stop(now + 0.16);
+      } catch (e) {
+        // Audio forbidden before user gesture
+      }
+    }
+
+    // Procedural Ambient Synthesizer (Icy pads & bell chord progression)
+    const soundBtn = document.getElementById('sound-btn');
+    const soundIcon = document.getElementById('sound-icon');
+    const soundLabel = document.getElementById('sound-label');
+
+    const chords = [
+      [57, 60, 64], // Am
+      [53, 57, 60], // F
+      [48, 52, 55], // C
+      [55, 59, 62]  // G
+    ];
+    let chordIdx = 0;
+
+    const midiToFreq = (m) => 440 * Math.pow(2, (m - 69) / 12);
+
+    function playAmbientChord() {
+      if (!isPlayingAmbient) return;
+      const ctx = getAudioCtx();
+      const chord = chords[chordIdx % chords.length];
+      chordIdx++;
+
+      const now = ctx.currentTime;
+      const duration = 4.0;
+
+      // Lush synth pad
+      chord.forEach((note) => {
+        [-4, 4].forEach((detune) => {
+          const osc = ctx.createOscillator();
+          const filter = ctx.createBiquadFilter();
+          const gain = ctx.createGain();
+
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(midiToFreq(note), now);
+          osc.detune.setValueAtTime(detune, now);
+
+          filter.type = 'lowpass';
+          filter.frequency.setValueAtTime(450, now);
+          filter.frequency.linearRampToValueAtTime(900, now + 1.8);
+          filter.frequency.linearRampToValueAtTime(450, now + duration);
+
+          gain.gain.setValueAtTime(0, now);
+          gain.gain.linearRampToValueAtTime(0.035, now + 1.2);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+          osc.connect(filter);
+          filter.connect(gain);
+          gain.connect(ctx.destination);
+
+          osc.start(now);
+          osc.stop(now + duration);
+        });
+      });
+
+      // Clear Bell Strike
+      const bellNote = chord[Math.floor(Math.random() * chord.length)] + 12;
+      const bellOsc = ctx.createOscillator();
+      const bellGain = ctx.createGain();
+      bellOsc.type = 'triangle';
+      bellOsc.frequency.setValueAtTime(midiToFreq(bellNote), now + 0.4);
+
+      bellGain.gain.setValueAtTime(0, now + 0.4);
+      bellGain.gain.linearRampToValueAtTime(0.04, now + 0.45);
+      bellGain.gain.exponentialRampToValueAtTime(0.0001, now + 3.0);
+
+      bellOsc.connect(bellGain);
+      bellGain.connect(ctx.destination);
+      bellOsc.start(now + 0.4);
+      bellOsc.stop(now + 3.2);
+    }
+
+    soundBtn.addEventListener('click', () => {
+      isPlayingAmbient = !isPlayingAmbient;
+      if (isPlayingAmbient) {
+        getAudioCtx();
+        soundBtn.classList.add('playing');
+        soundIcon.textContent = '🔊';
+        soundLabel.textContent = 'Playing Ambient';
+        playAmbientChord();
+        ambientInterval = setInterval(playAmbientChord, 3800);
+      } else {
+        soundBtn.classList.remove('playing');
+        soundIcon.textContent = '🔇';
+        soundLabel.textContent = 'Sound Ambient';
+        clearInterval(ambientInterval);
+      }
+    });
+
+    /* ==========================================================================
+       Procedural 3D Summit Simulator Canvas
+       ========================================================================== */
+    const summitCanvas = document.getElementById('summit-canvas');
+    if (summitCanvas) {
+      const ctx = summitCanvas.getContext('2d');
+      let width = (summitCanvas.width = summitCanvas.offsetWidth || 500);
+      let height = (summitCanvas.height = 240);
+      let mouseX = width / 2;
+
+      window.addEventListener('resize', () => {
+        if (!summitCanvas) return;
+        width = summitCanvas.width = summitCanvas.offsetWidth;
+        height = summitCanvas.height = 240;
+      });
+
+      summitCanvas.addEventListener('mousemove', (e) => {
+        const rect = summitCanvas.getBoundingClientRect();
+        mouseX = e.clientX - rect.left;
+      });
+
+      function drawSummitScene(time) {
+        ctx.clearRect(0, 0, width, height);
+
+        // Sky gradient
+        const sky = ctx.createLinearGradient(0, 0, 0, height);
+        sky.addColorStop(0, '#091322');
+        sky.addColorStop(0.65, '#12253e');
+        sky.addColorStop(1, '#1b3b55');
+        ctx.fillStyle = sky;
+        ctx.fillRect(0, 0, width, height);
+
+        // Stars / Snow particles
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+        for (let i = 0; i < 40; i++) {
+          const sx = (i * 37 + time * 0.015) % width;
+          const sy = (i * 23) % (height * 0.6);
+          ctx.beginPath();
+          ctx.arc(sx, sy, (i % 3 === 0 ? 1.5 : 0.8), 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // Parallax Mountain Layers
+        const pan = (mouseX / width - 0.5) * 35;
+
+        // Distant Ridge (Deep Cyan)
+        drawRidge(ctx, width, height, 0.45, 75, '#0c1b2c', pan * 0.3);
+
+        // Mid Ridge (Dark Alpine)
+        drawRidge(ctx, width, height, 0.6, 95, '#0e2439', pan * 0.6);
+
+        // Foreground Summit Peak (Icy Teal Crest)
+        ctx.beginPath();
+        ctx.moveTo(0, height);
+        ctx.lineTo(0, height * 0.7);
+        ctx.lineTo(width * 0.45 + pan, height * 0.28);
+        ctx.lineTo(width * 0.5 + pan, height * 0.3);
+        ctx.lineTo(width, height * 0.75);
+        ctx.lineTo(width, height);
+        ctx.closePath();
+        ctx.fillStyle = '#060f1c';
+        ctx.fill();
+
+        // Glowing Snow Ridge / Icy highlight
+        ctx.beginPath();
+        ctx.moveTo(width * 0.2 + pan * 0.8, height * 0.52);
+        ctx.lineTo(width * 0.45 + pan, height * 0.28);
+        ctx.lineTo(width * 0.75 + pan * 1.1, height * 0.6);
+        ctx.strokeStyle = '#3dd6c3';
+        ctx.lineWidth = 2.5;
+        ctx.shadowColor = '#3dd6c3';
+        ctx.shadowBlur = 15;
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+
+        requestAnimationFrame(drawSummitScene);
+      }
+
+      function drawRidge(ctx, w, h, baseRatio, variance, color, shift) {
+        ctx.beginPath();
+        ctx.moveTo(0, h);
+        ctx.lineTo(0, h * baseRatio);
+        const steps = 8;
+        for (let i = 1; i <= steps; i++) {
+          const x = (w / steps) * i;
+          const y = h * baseRatio + Math.sin(i * 1.2 + shift * 0.05) * variance * 0.3;
+          ctx.lineTo(x + shift, y);
+        }
+        ctx.lineTo(w, h);
+        ctx.closePath();
+        ctx.fillStyle = color;
+        ctx.fill();
+      }
+
+      requestAnimationFrame(drawSummitScene);
+    }
+
+    /* ==========================================================================
+       Interactive Stopwatch Widget Simulator
+       ========================================================================== */
+    const swClock = document.getElementById('demo-sw-clock');
+    const swToggle = document.getElementById('demo-sw-toggle');
+    const swReset = document.getElementById('demo-sw-reset');
+
+    let swSeconds = 45 * 60 + 12;
+    let swInterval = null;
+    let swRunning = false;
+
+    function formatTime(s) {
+      const hrs = String(Math.floor(s / 3600)).padStart(2, '0');
+      const mins = String(Math.floor((s % 3600) / 60)).padStart(2, '0');
+      const secs = String(s % 60).padStart(2, '0');
+      return `${hrs}:${mins}:${secs}`;
+    }
+
+    if (swToggle) {
+      swToggle.addEventListener('click', () => {
+        swRunning = !swRunning;
+        if (swRunning) {
+          swToggle.textContent = 'Pause';
+          swToggle.style.background = 'var(--accent)';
+          swToggle.style.color = '#050811';
+          swInterval = setInterval(() => {
+            swSeconds++;
+            swClock.textContent = formatTime(swSeconds);
+          }, 1000);
+        } else {
+          swToggle.textContent = 'Resume';
+          swToggle.style.background = 'transparent';
+          swToggle.style.color = 'var(--accent)';
+          clearInterval(swInterval);
+        }
+      });
+
+      swReset.addEventListener('click', () => {
+        swRunning = false;
+        clearInterval(swInterval);
+        swSeconds = 0;
+        swClock.textContent = formatTime(swSeconds);
+        swToggle.textContent = 'Start';
+        swToggle.style.background = 'transparent';
+        swToggle.style.color = 'var(--accent)';
+      });
+    }
+
+    /* ==========================================================================
+       FAQ Accordion Logic
+       ========================================================================== */
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach((item) => {
+      const q = item.querySelector('.faq-question');
+      q.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+        faqItems.forEach((other) => other.classList.remove('active'));
+        if (!isActive) {
+          item.classList.add('active');
+        }
+      });
+    });
+
+    /* ==========================================================================
+       Sticky Launch Bar on Scroll
+       ========================================================================== */
+    const stickyBar = document.getElementById('sticky-bar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 450) {
+        stickyBar.classList.add('visible');
+      } else {
+        stickyBar.classList.remove('visible');
+      }
+    });
+
+    /* ==========================================================================
+       Ambient Canvas Snowfall Particle System
+       ========================================================================== */
+    const bgCanvas = document.getElementById('bg-canvas');
+    if (bgCanvas) {
+      const bgCtx = bgCanvas.getContext('2d');
+      let w = (bgCanvas.width = window.innerWidth);
+      let h = (bgCanvas.height = window.innerHeight);
+
+      window.addEventListener('resize', () => {
+        w = bgCanvas.width = window.innerWidth;
+        h = bgCanvas.height = window.innerHeight;
+      });
+
+      const flakes = Array.from({ length: 65 }, () => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        radius: Math.random() * 1.6 + 0.4,
+        speedY: Math.random() * 0.7 + 0.3,
+        speedX: (Math.random() - 0.5) * 0.3,
+        opacity: Math.random() * 0.6 + 0.2
+      }));
+
+      function renderSnow() {
+        bgCtx.clearRect(0, 0, w, h);
+        flakes.forEach((f) => {
+          f.y += f.speedY;
+          f.x += f.speedX;
+
+          if (f.y > h) {
+            f.y = -5;
+            f.x = Math.random() * w;
+          }
+          if (f.x > w) f.x = 0;
+          if (f.x < 0) f.x = w;
+
+          bgCtx.beginPath();
+          bgCtx.arc(f.x, f.y, f.radius, 0, Math.PI * 2);
+          bgCtx.fillStyle = `rgba(215, 235, 255, ${f.opacity})`;
+          bgCtx.fill();
+        });
+
+        requestAnimationFrame(renderSnow);
+      }
+
+      requestAnimationFrame(renderSnow);
+    }
+  </script>
+</body>
+</html>
