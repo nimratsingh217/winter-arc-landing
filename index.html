@@ -3,50 +3,41 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>90-Day Winter Arc — Personal Transformation Protocol</title>
-  <meta name="description" content="The definitive, privacy-first personal transformation tracker. 90 days of relentless discipline across Nutrition, Gym, Hygiene, Mind, and DSA with ambient soundscapes and 3D summit visuals.">
+  <title>90-Day Winter Arc — Personal Transformation Challenge</title>
+  <meta name="description" content="Winter Arc is a 90-day personal transformation challenge designed to help you build discipline, consistency and better habits. Free, private, and browser-based.">
   
   <!-- Open Graph -->
-  <meta property="og:title" content="90-Day Winter Arc — Personal Transformation Protocol">
-  <meta property="og:description" content="Lock in for 90 days. 5 core pillars, generative procedural audio, dynamic 3D mountain summit, and 100% offline privacy.">
+  <meta property="og:title" content="90-Day Winter Arc — Personal Transformation Challenge">
+  <meta property="og:description" content="A 90-day personal transformation challenge to build discipline, consistency and better habits. Starts the day you do.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://nimratsingh217.github.io/winter-arc/">
+  <meta property="og:url" content="https://nimratsingh217.github.io/winter-arc-landing/">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #050811;
-      --bg-alt: #0a101d;
-      --surface: #0e1626;
-      --surface-border: #1a273e;
-      --surface-hover: #141f36;
+      --bg: #070a10;
+      --bg-alt: #0d121c;
+      --surface: #0e141f;
+      --surface-border: #1b2638;
+      --surface-hover: #162032;
       --accent: #3dd6c3;
       --accent-glow: rgba(61, 214, 195, 0.35);
       --accent-dim: rgba(61, 214, 195, 0.12);
       --accent-light: #7fe9ff;
+      --crimson: #ff4766;
       --text: #e8ecf4;
       --text-muted: #8d97a9;
-      --text-dim: #5a667d;
-      --crimson: #ff4766;
-      --gold: #f59e0b;
-      --purple: #a855f7;
+      --text-dim: #546076;
       --radius-sm: 8px;
       --radius-md: 14px;
-      --radius-lg: 22px;
+      --radius-lg: 20px;
       --radius-full: 9999px;
       --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
-      --container: 1180px;
-    }
-
-    [data-theme="crimson"] {
-      --accent: #ff4766;
-      --accent-glow: rgba(255, 71, 102, 0.35);
-      --accent-dim: rgba(255, 71, 102, 0.12);
-      --accent-light: #ffa1b2;
+      --container: 1140px;
     }
 
     * {
@@ -70,6 +61,12 @@
       position: relative;
     }
 
+    /* Accessibility Focus States */
+    a:focus-visible, button:focus-visible, input:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
     /* Ambient Canvas Background */
     #bg-canvas {
       position: fixed;
@@ -79,19 +76,7 @@
       height: 100%;
       pointer-events: none;
       z-index: 0;
-      opacity: 0.65;
-    }
-
-    .ambient-glow {
-      position: fixed;
-      top: -200px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 800px;
-      height: 600px;
-      background: radial-gradient(ellipse at center, rgba(61, 214, 195, 0.15) 0%, rgba(13, 22, 38, 0) 70%);
-      pointer-events: none;
-      z-index: 0;
+      opacity: 0.5;
     }
 
     .container {
@@ -106,19 +91,12 @@
     /* Typography */
     h1, h2, h3, h4 {
       font-weight: 800;
-      letter-spacing: -0.03em;
-      line-height: 1.15;
+      letter-spacing: -0.025em;
+      line-height: 1.18;
     }
 
     .accent-text {
       color: var(--accent);
-      text-shadow: 0 0 20px var(--accent-glow);
-    }
-
-    .gradient-text {
-      background: linear-gradient(135deg, #ffffff 30%, var(--accent) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
     }
 
     .mono {
@@ -130,10 +108,10 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      background: rgba(5, 8, 17, 0.75);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background: rgba(7, 10, 16, 0.85);
+      border-bottom: 1px solid var(--surface-border);
       transition: all 0.3s ease;
     }
 
@@ -141,7 +119,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 72px;
+      height: 70px;
     }
 
     .brand {
@@ -153,24 +131,23 @@
     }
 
     .brand-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, rgba(61, 214, 195, 0.2), rgba(61, 214, 195, 0.05));
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      background: var(--accent-dim);
       border: 1px solid var(--accent);
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--accent);
-      font-weight: 900;
-      font-size: 17px;
-      box-shadow: 0 0 15px var(--accent-glow);
+      font-weight: 800;
+      font-size: 15px;
     }
 
     .brand-name {
       font-weight: 800;
-      font-size: 17px;
-      letter-spacing: 0.08em;
+      font-size: 16px;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
     }
 
@@ -182,27 +159,8 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 28px;
+      gap: 26px;
       list-style: none;
-    }
-
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-      }
-      .brand-name {
-        font-size: 14px;
-      }
-      .btn-sound span#sound-label {
-        display: none;
-      }
-      .btn-sound {
-        padding: 8px 10px;
-      }
-      .btn-cta {
-        padding: 8px 14px;
-        font-size: 13px;
-      }
     }
 
     .nav-links a {
@@ -217,6 +175,12 @@
       color: var(--text);
     }
 
+    @media (max-width: 860px) {
+      .nav-links {
+        display: none;
+      }
+    }
+
     .nav-actions {
       display: flex;
       align-items: center;
@@ -224,36 +188,35 @@
     }
 
     .btn-sound {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.04);
       border: 1px solid var(--surface-border);
       color: var(--text-muted);
-      padding: 8px 14px;
+      padding: 8px 12px;
       border-radius: var(--radius-full);
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       transition: all 0.2s;
     }
 
     .btn-sound:hover {
       color: var(--text);
       border-color: var(--accent);
-      background: var(--accent-dim);
     }
 
     .btn-sound.playing {
       color: var(--accent);
       border-color: var(--accent);
-      box-shadow: 0 0 12px var(--accent-glow);
     }
 
-    .btn-cta {
+    /* Single Primary CTA */
+    .btn-primary-cta {
       background: var(--accent);
-      color: #050811;
-      font-weight: 700;
+      color: #050810;
+      font-weight: 800;
       font-size: 14px;
       letter-spacing: 0.02em;
       padding: 10px 20px;
@@ -261,133 +224,22 @@
       text-decoration: none;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       box-shadow: 0 0 20px var(--accent-glow);
       border: 1px solid var(--accent-light);
+      cursor: pointer;
     }
 
-    .btn-cta:hover {
+    .btn-primary-cta:hover {
       transform: translateY(-2px);
-      box-shadow: 0 0 30px rgba(61, 214, 195, 0.6);
-      background: #4ae0cd;
+      box-shadow: 0 0 28px rgba(61, 214, 195, 0.55);
+      background: #4de2cf;
     }
 
-    .btn-launch-web {
-      background: linear-gradient(135deg, rgba(14, 26, 44, 0.95), rgba(7, 14, 25, 0.95));
-      color: #e8ecf4;
-      border: 1.5px solid var(--accent);
-      box-shadow: 0 0 20px rgba(61, 214, 195, 0.2);
-      cursor: pointer;
-    }
-
-    .btn-launch-web:hover {
-      background: rgba(20, 42, 70, 0.95);
-      border-color: var(--accent-light);
-      color: #ffffff;
-      box-shadow: 0 0 30px rgba(61, 214, 195, 0.45);
-    }
-
-    .dual-launch-wrap {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .launch-btn-inner {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .launch-icon {
-      font-size: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .launch-text-wrap {
-      display: flex;
-      flex-direction: column;
-      text-align: left;
-      line-height: 1.25;
-    }
-
-    .launch-main {
-      font-weight: 800;
-      font-size: 16px;
-      letter-spacing: 0.02em;
-    }
-
-    .launch-sub {
-      font-size: 11px;
-      opacity: 0.82;
-      font-weight: 500;
-    }
-
-    /* Modal for App Launch / Install Helper */
-    .app-modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(3, 6, 12, 0.88);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      z-index: 1000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .app-modal-overlay.active {
-      display: flex;
-    }
-
-    .app-modal-card {
-      background: linear-gradient(180deg, #0e172a 0%, #070c18 100%);
-      border: 1px solid rgba(61, 214, 195, 0.4);
-      border-radius: var(--radius-lg);
-      padding: 32px;
-      max-width: 520px;
-      width: 100%;
-      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.9), 0 0 40px -10px var(--accent-glow);
-      position: relative;
-      animation: modalFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    @keyframes modalFadeIn {
-      from { opacity: 0; transform: scale(0.95) translateY(10px); }
-      to { opacity: 1; transform: scale(1) translateY(0); }
-    }
-
-    .app-modal-close {
-      position: absolute;
-      top: 18px;
-      right: 18px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid var(--surface-border);
-      color: var(--text-muted);
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      transition: all 0.2s;
-    }
-
-    .app-modal-close:hover {
-      background: rgba(255, 255, 255, 0.15);
-      color: var(--text);
-    }
-
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.04);
+    .btn-ghost {
+      background: transparent;
       border: 1px solid var(--surface-border);
       color: var(--text);
       font-weight: 600;
@@ -399,17 +251,33 @@
       align-items: center;
       gap: 8px;
       transition: all 0.2s;
+      cursor: pointer;
     }
 
-    .btn-secondary:hover {
+    .btn-ghost:hover {
       background: var(--surface-hover);
-      border-color: rgba(255, 255, 255, 0.2);
-      transform: translateY(-1px);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .install-link {
+      color: var(--text-muted);
+      font-size: 12px;
+      text-decoration: underline;
+      cursor: pointer;
+      display: inline-block;
+      margin-top: 10px;
+      background: none;
+      border: none;
+      font-family: inherit;
+    }
+
+    .install-link:hover {
+      color: var(--accent);
     }
 
     /* Hero Section */
     .hero {
-      padding: 90px 0 80px;
+      padding: 85px 0 65px;
       text-align: center;
       position: relative;
     }
@@ -420,67 +288,57 @@
       gap: 8px;
       padding: 6px 16px;
       border-radius: var(--radius-full);
-      background: rgba(61, 214, 195, 0.08);
-      border: 1px solid rgba(61, 214, 195, 0.25);
+      background: var(--accent-dim);
+      border: 1px solid rgba(61, 214, 195, 0.3);
       color: var(--accent);
       font-size: 12px;
       font-weight: 700;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      margin-bottom: 24px;
-      box-shadow: 0 0 15px rgba(61, 214, 195, 0.1);
-    }
-
-    .badge-pill span.pulse {
-      width: 7px;
-      height: 7px;
-      background: var(--accent);
-      border-radius: 50%;
-      display: inline-block;
-      box-shadow: 0 0 8px var(--accent);
-      animation: pulseAnim 2s infinite;
-    }
-
-    @keyframes pulseAnim {
-      0% { transform: scale(0.95); opacity: 0.8; }
-      50% { transform: scale(1.3); opacity: 1; }
-      100% { transform: scale(0.95); opacity: 0.8; }
+      margin-bottom: 22px;
     }
 
     .hero-title {
-      font-size: clamp(40px, 6.5vw, 76px);
-      letter-spacing: -0.04em;
+      font-size: clamp(34px, 5.5vw, 68px);
+      letter-spacing: -0.035em;
       font-weight: 900;
-      margin-bottom: 24px;
-      line-height: 1.05;
+      margin-bottom: 22px;
       text-transform: uppercase;
     }
 
     .hero-sub {
-      font-size: clamp(16px, 2vw, 20px);
+      font-size: clamp(16px, 1.8vw, 19px);
       color: var(--text-muted);
-      max-width: 680px;
-      margin: 0 auto 36px;
+      max-width: 660px;
+      margin: 0 auto 34px;
       line-height: 1.6;
     }
 
     .hero-ctas {
       display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+
+    .hero-btn-row {
+      display: flex;
       align-items: center;
       justify-content: center;
-      gap: 16px;
+      gap: 14px;
       flex-wrap: wrap;
-      margin-bottom: 48px;
     }
 
     .hero-stats {
       display: flex;
       justify-content: center;
-      gap: 48px;
-      padding-top: 32px;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      max-width: 800px;
+      gap: 40px;
+      padding-top: 28px;
+      border-top: 1px solid var(--surface-border);
+      max-width: 760px;
       margin: 0 auto;
+      flex-wrap: wrap;
     }
 
     .hero-stat-item {
@@ -488,434 +346,412 @@
     }
 
     .hero-stat-val {
-      font-size: 28px;
+      font-size: 24px;
       font-weight: 800;
       color: var(--accent);
       font-family: var(--font-mono);
       display: block;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
 
     .hero-stat-lbl {
-      font-size: 12px;
+      font-size: 11px;
       letter-spacing: 0.08em;
       color: var(--text-muted);
       text-transform: uppercase;
       font-weight: 600;
     }
 
-    /* Live Interactive Hero App Preview */
-    .app-preview-wrap {
-      margin: 40px auto 0;
-      max-width: 980px;
-      position: relative;
-    }
-
-    .preview-card {
-      background: linear-gradient(180deg, #0d1526 0%, #080c16 100%);
-      border: 1px solid rgba(61, 214, 195, 0.25);
-      border-radius: var(--radius-lg);
-      padding: 24px;
-      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 40px -10px var(--accent-glow);
-      position: relative;
-      overflow: hidden;
-      text-align: left;
-    }
-
-    .preview-card-glow {
-      position: absolute;
-      top: 0;
-      left: 15%;
-      width: 70%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--accent), transparent);
-    }
-
-    .preview-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-bottom: 18px;
-      border-bottom: 1px solid var(--surface-border);
-      margin-bottom: 20px;
-    }
-
-    .preview-title {
-      font-size: 15px;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text);
-    }
-
-    .preview-title em {
-      font-style: normal;
-      color: var(--accent);
-    }
-
-    .preview-tags {
-      display: flex;
-      gap: 12px;
-    }
-
-    .preview-tag {
-      font-size: 11px;
-      font-family: var(--font-mono);
-      padding: 4px 10px;
-      border-radius: var(--radius-sm);
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--text-muted);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .preview-tag.live {
-      color: var(--accent);
-      background: var(--accent-dim);
-      border-color: rgba(61, 214, 195, 0.3);
-    }
-
-    /* Interactive Demo Grid Inside Card */
-    .interactive-demo {
-      display: grid;
-      grid-template-columns: 1.3fr 1fr;
-      gap: 24px;
-      align-items: center;
-    }
-
-    @media (max-width: 820px) {
-      .interactive-demo {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .checklist-title {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--text-muted);
-      margin-bottom: 14px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .checklist-items {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .check-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--surface-border);
-      padding: 10px 14px;
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      transition: all 0.2s;
-      user-select: none;
-    }
-
-    .check-row:hover {
-      background: rgba(61, 214, 195, 0.06);
-      border-color: rgba(61, 214, 195, 0.3);
-    }
-
-    .check-row.checked {
-      background: rgba(61, 214, 195, 0.12);
-      border-color: var(--accent);
-    }
-
-    .check-label {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    .check-pill {
-      font-size: 10px;
-      font-weight: 700;
-      padding: 2px 6px;
-      border-radius: 4px;
-      text-transform: uppercase;
-    }
-
-    .pill-nutrition { background: rgba(47, 209, 176, 0.15); color: #2fd1b0; }
-    .pill-gym { background: rgba(74, 222, 128, 0.15); color: #4ade80; }
-    .pill-hygiene { background: rgba(91, 140, 255, 0.15); color: #5b8cff; }
-    .pill-mind { background: rgba(176, 124, 255, 0.15); color: #b07cff; }
-    .pill-skill { background: rgba(255, 107, 139, 0.15); color: #ff6b8b; }
-
-    .check-box {
-      width: 20px;
-      height: 20px;
-      border-radius: 5px;
-      border: 2px solid var(--text-dim);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
-      color: transparent;
-      font-size: 12px;
-      font-weight: 900;
-    }
-
-    .check-row.checked .check-box {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #050811;
-      box-shadow: 0 0 10px var(--accent-glow);
-    }
-
-    /* Right column: Status Display */
-    .status-panel {
-      background: rgba(5, 8, 17, 0.6);
-      border: 1px solid var(--surface-border);
-      border-radius: var(--radius-md);
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      position: relative;
-    }
-
-    .status-score-ring {
-      width: 120px;
-      height: 120px;
-      position: relative;
-      margin-bottom: 16px;
-    }
-
-    .status-score-ring svg {
-      width: 100%;
-      height: 100%;
-      transform: rotate(-90deg);
-    }
-
-    .status-score-ring circle.bg {
-      stroke: var(--surface-border);
-      fill: none;
-      stroke-width: 8;
-    }
-
-    .status-score-ring circle.progress {
-      stroke: var(--accent);
-      fill: none;
-      stroke-width: 8;
-      stroke-linecap: round;
-      stroke-dasharray: 339;
-      stroke-dashoffset: 339;
-      transition: stroke-dashoffset 0.4s ease;
-      filter: drop-shadow(0 0 6px var(--accent));
-    }
-
-    .status-score-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 26px;
-      font-weight: 800;
-      font-family: var(--font-mono);
-      color: var(--text);
-    }
-
-    .status-score-text span {
-      font-size: 13px;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-
-    .status-badge {
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 5px 14px;
-      border-radius: var(--radius-full);
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--text-muted);
-      margin-bottom: 12px;
-      transition: all 0.3s;
-    }
-
-    .status-badge.solid {
-      background: rgba(61, 214, 195, 0.2);
-      color: var(--accent);
-      border: 1px solid var(--accent);
-      box-shadow: 0 0 15px var(--accent-glow);
-    }
-
-    .status-desc {
-      font-size: 12px;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    .preview-bottom-bar {
-      margin-top: 20px;
-      padding-top: 16px;
-      border-top: 1px solid var(--surface-border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 12px;
-      color: var(--text-muted);
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .preview-live-link {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 700;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .preview-live-link:hover {
-      text-decoration: underline;
-    }
-
     /* Section Styles */
     section {
-      padding: 90px 0;
+      padding: 80px 0;
       position: relative;
     }
 
     .section-header {
       text-align: center;
-      max-width: 680px;
-      margin: 0 auto 60px;
+      max-width: 660px;
+      margin: 0 auto 50px;
     }
 
     .section-eyebrow {
       font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.14em;
+      font-weight: 700;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       display: inline-block;
     }
 
     .section-title {
-      font-size: clamp(30px, 4vw, 44px);
-      letter-spacing: -0.03em;
-      margin-bottom: 16px;
+      font-size: clamp(26px, 3.5vw, 40px);
+      letter-spacing: -0.025em;
+      margin-bottom: 14px;
     }
 
     .section-subtitle {
-      font-size: 16px;
+      font-size: 15px;
       color: var(--text-muted);
       line-height: 1.6;
     }
 
-    /* Philosophy / Contrast Section */
-    .contrast-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 28px;
+    /* Task 11: The Film Section */
+    .film-container {
+      max-width: 880px;
+      margin: 0 auto;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--surface-border);
+      background: #000;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      position: relative;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(61, 214, 195, 0.15);
+    }
+
+    .film-poster {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 30%, #15243f 0%, #070b14 75%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+      z-index: 2;
+    }
+
+    .film-play-btn {
+      background: var(--accent);
+      color: #050810;
+      font-weight: 800;
+      font-size: 15px;
+      letter-spacing: 0.06em;
+      padding: 14px 28px;
+      border-radius: var(--radius-full);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.25s;
+      box-shadow: 0 0 25px var(--accent-glow);
+      margin-top: 18px;
+    }
+
+    .film-play-btn:hover {
+      transform: scale(1.05);
+      background: #4de2cf;
+    }
+
+    .film-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    /* Task 10: "See it in action" Real Screenshot Gallery */
+    .gallery-wrap {
       max-width: 980px;
       margin: 0 auto;
     }
 
-    @media (max-width: 768px) {
-      .contrast-grid {
+    .gallery-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .gallery-tab {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      color: var(--text-muted);
+      padding: 8px 16px;
+      border-radius: var(--radius-full);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .gallery-tab:hover {
+      color: var(--text);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .gallery-tab.active {
+      color: var(--accent);
+      border-color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    .gallery-viewport {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
+      position: relative;
+    }
+
+    .gallery-frame {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--surface-border);
+      background: #050810;
+      position: relative;
+      cursor: zoom-in;
+    }
+
+    .gallery-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: opacity 0.3s;
+    }
+
+    .gallery-caption {
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    .gallery-cta-row {
+      text-align: center;
+      margin-top: 36px;
+    }
+
+    /* Lightbox Modal */
+    .lightbox-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 7, 12, 0.94);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .lightbox-modal.active {
+      display: flex;
+    }
+
+    .lightbox-content {
+      max-width: 90vw;
+      max-height: 85vh;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--surface-border);
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.9);
+      position: relative;
+    }
+
+    .lightbox-img {
+      width: 100%;
+      height: 100%;
+      max-height: 85vh;
+      object-fit: contain;
+      display: block;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--surface-border);
+      color: #fff;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .lightbox-close:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    /* Point 1: Playable Monster Arena Demo */
+    .arena-card {
+      background: linear-gradient(180deg, #0e1626 0%, #080d16 100%);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      max-width: 940px;
+      margin: 0 auto;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+    }
+
+    .arena-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    @media (max-width: 820px) {
+      .arena-grid {
         grid-template-columns: 1fr;
       }
     }
 
-    .contrast-card {
-      padding: 32px;
-      border-radius: var(--radius-lg);
+    .monster-stage {
+      background: rgba(5, 8, 16, 0.7);
       border: 1px solid var(--surface-border);
-      background: var(--surface);
-    }
-
-    .contrast-card.bad {
-      background: rgba(26, 17, 24, 0.4);
-      border-color: rgba(255, 71, 102, 0.2);
-    }
-
-    .contrast-card.good {
-      background: linear-gradient(180deg, rgba(14, 26, 38, 0.8) 0%, rgba(9, 16, 26, 0.9) 100%);
-      border-color: rgba(61, 214, 195, 0.4);
-      box-shadow: 0 0 30px rgba(61, 214, 195, 0.08);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      text-align: center;
       position: relative;
     }
 
-    .contrast-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-
-    .contrast-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
+    .monster-preview-box {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 16px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 16px;
-    }
-
-    .contrast-card.bad .contrast-icon {
-      background: rgba(255, 71, 102, 0.15);
-      color: var(--crimson);
-    }
-
-    .contrast-card.good .contrast-icon {
-      background: var(--accent-dim);
-      color: var(--accent);
-      box-shadow: 0 0 12px var(--accent-glow);
-    }
-
-    .contrast-title {
-      font-size: 18px;
-      font-weight: 800;
-    }
-
-    .contrast-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .contrast-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      font-size: 14px;
-      color: var(--text-muted);
-    }
-
-    .contrast-list li strong {
-      color: var(--text);
-    }
-
-    .contrast-card.good .contrast-list li {
-      color: #cfd8e8;
-    }
-
-    /* 3 Phases of Winter Arc */
-    .phases-wrap {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
       position: relative;
     }
 
-    @media (max-width: 900px) {
+    .monster-img-live {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 16px var(--accent-glow));
+      transition: transform 0.15s ease;
+    }
+
+    .monster-hp-bar {
+      height: 8px;
+      background: var(--surface-border);
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 12px 0 6px;
+    }
+
+    .monster-hp-fill {
+      height: 100%;
+      background: var(--accent);
+      width: 100%;
+      transition: width 0.3s ease;
+    }
+
+    .check-list-arena {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .check-item-arena {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--surface-border);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      user-select: none;
+      transition: all 0.15s;
+    }
+
+    .check-item-arena:hover {
+      background: rgba(61, 214, 195, 0.05);
+      border-color: rgba(61, 214, 195, 0.3);
+    }
+
+    .check-item-arena.checked {
+      background: var(--accent-dim);
+      border-color: var(--accent);
+    }
+
+    .check-box-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      border: 1.5px solid var(--text-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: transparent;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .check-item-arena.checked .check-box-icon {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #050810;
+    }
+
+    /* Task 5: Why Winter Arc is Different (4 Cards) */
+    .diff-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    .diff-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius-md);
+      padding: 26px 22px;
+      transition: border-color 0.2s;
+    }
+
+    .diff-card:hover {
+      border-color: rgba(61, 214, 195, 0.3);
+    }
+
+    .diff-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: var(--accent-dim);
+      border: 1px solid rgba(61, 214, 195, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .diff-title {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .diff-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* 3 Phases Section (Date-Agnostic) */
+    .phases-wrap {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 860px) {
       .phases-wrap {
         grid-template-columns: 1fr;
       }
@@ -925,15 +761,7 @@
       background: var(--surface);
       border: 1px solid var(--surface-border);
       border-radius: var(--radius-md);
-      padding: 30px 24px;
-      position: relative;
-      transition: all 0.3s;
-    }
-
-    .phase-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(61, 214, 195, 0.4);
-      box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.6);
+      padding: 28px 22px;
     }
 
     .phase-badge {
@@ -943,278 +771,247 @@
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      padding: 4px 10px;
+      padding: 3px 8px;
       border-radius: 4px;
-      margin-bottom: 16px;
+      background: var(--accent-dim);
+      color: var(--accent);
+      margin-bottom: 14px;
     }
 
-    .phase-1 .phase-badge { background: rgba(47, 209, 176, 0.15); color: #2fd1b0; }
-    .phase-2 .phase-badge { background: rgba(91, 140, 255, 0.15); color: #5b8cff; }
-    .phase-3 .phase-badge { background: rgba(255, 71, 102, 0.15); color: #ff6b8b; }
-
-    .phase-name {
-      font-size: 22px;
-      margin-bottom: 8px;
+    .phase-title {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 4px;
     }
 
-    .phase-dates {
-      font-size: 13px;
+    .phase-days {
+      font-size: 12px;
       color: var(--text-muted);
       font-family: var(--font-mono);
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       display: block;
     }
 
     .phase-desc {
-      font-size: 14px;
+      font-size: 13.5px;
       color: var(--text-muted);
-      line-height: 1.6;
+      line-height: 1.55;
     }
 
-    /* 5 Pillars Section */
+    /* 5 Core Pillars Section (Calm, Inclusive) */
     .pillars-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 18px;
     }
 
     .pillar-card {
       background: var(--surface);
       border: 1px solid var(--surface-border);
       border-radius: var(--radius-md);
-      padding: 26px 20px;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-      overflow: hidden;
+      padding: 24px 20px;
     }
 
-    .pillar-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background: var(--p-color, var(--accent));
-      opacity: 0.8;
-    }
-
-    .pillar-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--p-color, var(--accent));
-      box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.6);
-    }
-
-    .pillar-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.04);
+    .pillar-line-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--surface-border);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 22px;
-      margin-bottom: 18px;
-      border: 1px solid var(--surface-border);
+      color: var(--accent);
+      margin-bottom: 14px;
     }
 
     .pillar-title {
-      font-size: 17px;
-      margin-bottom: 10px;
-      color: var(--text);
-    }
-
-    .pillar-target {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--p-color, var(--accent));
-      margin-bottom: 12px;
+      font-size: 16px;
       font-weight: 700;
+      margin-bottom: 6px;
     }
 
-    .pillar-body {
+    .pillar-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Task 12: Beyond the Checklist (Features List) */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      transition: border-color 0.2s;
+    }
+
+    .feature-card:hover {
+      border-color: rgba(61, 214, 195, 0.3);
+    }
+
+    .feature-icon-svg {
+      width: 32px;
+      height: 32px;
+      color: var(--accent);
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .feature-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .feature-desc {
       font-size: 13px;
       color: var(--text-muted);
       line-height: 1.55;
     }
 
-    /* Innovation / Showcase Cards */
-    .features-showcase {
+    /* Point 6: Voxel Monster Showcase Gallery */
+    .monster-showcase-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 28px;
+      gap: 24px;
+      max-width: 860px;
+      margin: 0 auto;
     }
 
-    @media (max-width: 860px) {
-      .features-showcase {
+    @media (max-width: 720px) {
+      .monster-showcase-grid {
         grid-template-columns: 1fr;
       }
     }
 
-    .showcase-card {
+    .monster-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      text-align: center;
+      position: relative;
+    }
+
+    .monster-badge-top {
+      display: inline-block;
+      font-size: 11px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      margin-bottom: 14px;
+    }
+
+    .badge-daily {
+      background: var(--accent-dim);
+      color: var(--accent);
+      border: 1px solid rgba(61, 214, 195, 0.3);
+    }
+
+    .badge-weekly {
+      background: rgba(255, 71, 102, 0.12);
+      color: var(--crimson);
+      border: 1px solid rgba(255, 71, 102, 0.3);
+    }
+
+    /* Point 2: Scroll-Driven Summit Ascent Tracker */
+    .summit-tracker-rail {
+      position: fixed;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 200px;
+      width: 3px;
+      background: var(--surface-border);
+      border-radius: 2px;
+      z-index: 90;
+      pointer-events: none;
+    }
+
+    @media (max-width: 900px) {
+      .summit-tracker-rail {
+        display: none;
+      }
+    }
+
+    .summit-hiker-thumb {
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+      transition: top 0.1s linear;
+    }
+
+    .summit-hiker-label {
+      position: absolute;
+      right: 22px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 10px;
+      font-family: var(--font-mono);
+      color: var(--accent);
+      white-space: nowrap;
+      background: rgba(7, 10, 16, 0.85);
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--surface-border);
+    }
+
+    /* Point 4: Personalized 90-Day Plan Generator */
+    .generator-card {
       background: var(--surface);
       border: 1px solid var(--surface-border);
       border-radius: var(--radius-lg);
       padding: 32px;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      max-width: 680px;
+      margin: 0 auto;
     }
 
-    .showcase-card.featured {
-      grid-column: 1 / -1;
-      background: linear-gradient(135deg, rgba(14, 22, 38, 0.9) 0%, rgba(8, 12, 22, 0.95) 100%);
-      border-color: rgba(61, 214, 195, 0.35);
-    }
-
-    .showcase-eyebrow {
-      font-size: 11px;
-      font-family: var(--font-mono);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 8px;
-      display: block;
-    }
-
-    .showcase-title {
-      font-size: 24px;
-      margin-bottom: 14px;
-    }
-
-    .showcase-desc {
+    .gen-input {
+      width: 100%;
+      background: #050810;
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
       font-size: 14px;
-      color: var(--text-muted);
-      line-height: 1.6;
-      margin-bottom: 24px;
-    }
-
-    .showcase-visual {
-      background: #060912;
-      border: 1px solid var(--surface-border);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      position: relative;
-      min-height: 220px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* Canvas Mountain Summit Simulator in Showcase */
-    #summit-canvas {
-      width: 100%;
-      height: 240px;
-      display: block;
-      cursor: crosshair;
-    }
-
-    .summit-controls {
-      position: absolute;
-      bottom: 12px;
-      left: 12px;
-      right: 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      pointer-events: none;
-    }
-
-    .summit-pill {
-      background: rgba(5, 8, 17, 0.85);
-      border: 1px solid rgba(61, 214, 195, 0.3);
-      padding: 4px 12px;
-      border-radius: var(--radius-full);
-      font-size: 11px;
-      font-family: var(--font-mono);
-      color: var(--accent-light);
-      backdrop-filter: blur(8px);
-    }
-
-    /* Mini Stopwatch widget */
-    .stopwatch-widget {
-      padding: 24px;
-      text-align: center;
-      width: 100%;
-    }
-
-    .stopwatch-clock {
-      font-size: 42px;
-      font-weight: 800;
-      font-family: var(--font-mono);
-      color: var(--accent);
-      letter-spacing: 0.05em;
-      margin-bottom: 14px;
-      text-shadow: 0 0 15px var(--accent-glow);
-    }
-
-    .stopwatch-btns {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-    }
-
-    .btn-sw {
-      background: transparent;
-      border: 1px solid var(--accent);
-      color: var(--accent);
-      padding: 6px 18px;
-      border-radius: var(--radius-full);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .btn-sw:hover {
-      background: var(--accent);
-      color: #050811;
-    }
-
-    /* Dual Ergonomics Section */
-    .ergonomics-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 28px;
-      align-items: center;
-    }
-
-    @media (max-width: 820px) {
-      .ergonomics-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .ergo-card {
-      background: var(--surface);
-      border: 1px solid var(--surface-border);
-      border-radius: var(--radius-lg);
-      padding: 36px 30px;
-    }
-
-    .ergo-pill {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      border-radius: 4px;
-      background: var(--accent-dim);
-      color: var(--accent);
-      display: inline-block;
+      color: var(--text);
+      font-family: inherit;
       margin-bottom: 16px;
-      font-weight: 700;
     }
 
-    /* FAQ Accordion */
+    .gen-result-card {
+      margin-top: 20px;
+      padding: 20px;
+      background: #050810;
+      border: 1px dashed var(--accent);
+      border-radius: var(--radius-md);
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+
+    /* FAQ Section */
     .faq-wrap {
-      max-width: 780px;
+      max-width: 740px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
     }
 
     .faq-item {
@@ -1222,16 +1019,11 @@
       border: 1px solid var(--surface-border);
       border-radius: var(--radius-md);
       overflow: hidden;
-      transition: border-color 0.2s;
-    }
-
-    .faq-item:hover {
-      border-color: rgba(61, 214, 195, 0.3);
     }
 
     .faq-question {
-      padding: 20px 24px;
-      font-size: 16px;
+      padding: 18px 22px;
+      font-size: 15px;
       font-weight: 700;
       display: flex;
       justify-content: space-between;
@@ -1242,8 +1034,8 @@
 
     .faq-chevron {
       color: var(--accent);
-      font-size: 18px;
-      transition: transform 0.3s;
+      font-size: 16px;
+      transition: transform 0.2s;
     }
 
     .faq-item.active .faq-chevron {
@@ -1251,8 +1043,8 @@
     }
 
     .faq-answer {
-      padding: 0 24px 20px;
-      font-size: 14px;
+      padding: 0 22px 18px;
+      font-size: 13.5px;
       color: var(--text-muted);
       line-height: 1.6;
       display: none;
@@ -1263,40 +1055,28 @@
     }
 
     /* Final CTA Banner */
-    .cta-banner {
-      background: radial-gradient(circle at 50% 0%, rgba(61, 214, 195, 0.22) 0%, rgba(14, 22, 38, 0.8) 70%);
-      border: 1px solid rgba(61, 214, 195, 0.4);
+    .final-cta-box {
+      background: radial-gradient(circle at 50% 10%, rgba(61, 214, 195, 0.16) 0%, rgba(14, 20, 31, 0.8) 70%);
+      border: 1px solid rgba(61, 214, 195, 0.35);
       border-radius: var(--radius-lg);
-      padding: 70px 32px;
+      padding: 65px 28px;
       text-align: center;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 20px 60px -20px var(--accent-glow);
-      margin-bottom: 80px;
+      margin-bottom: 60px;
     }
 
-    .cta-banner h2 {
-      font-size: clamp(32px, 5vw, 54px);
-      letter-spacing: -0.04em;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-      font-weight: 900;
-    }
-
-    .cta-banner p {
-      font-size: clamp(16px, 2vw, 19px);
+    .final-cta-sub {
+      font-size: 18px;
       color: var(--text-muted);
-      max-width: 600px;
-      margin: 0 auto 36px;
+      margin: 12px 0 28px;
     }
 
     /* Footer */
     footer {
       border-top: 1px solid var(--surface-border);
-      padding: 48px 0;
-      color: var(--text-muted);
+      padding: 42px 0;
       font-size: 13px;
-      background: #03050a;
+      color: var(--text-muted);
+      background: #04060b;
     }
 
     .footer-wrap {
@@ -1304,72 +1084,74 @@
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 20px;
-    }
-
-    .footer-quote {
-      font-weight: 700;
-      color: var(--text);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      font-size: 12px;
-    }
-
-    .footer-quote em {
-      font-style: normal;
-      color: var(--accent);
+      gap: 16px;
     }
 
     .footer-links {
       display: flex;
-      gap: 24px;
+      gap: 20px;
       list-style: none;
     }
 
     .footer-links a {
       color: var(--text-muted);
       text-decoration: none;
-      transition: color 0.2s;
     }
 
     .footer-links a:hover {
       color: var(--accent);
     }
 
-    /* Sticky Bottom Bar on Mobile/Desktop */
-    .sticky-bar {
+    /* Install Helper Modal */
+    .install-modal-backdrop {
       position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%) translateY(120px);
-      z-index: 99;
-      background: rgba(14, 22, 38, 0.85);
-      border: 1px solid rgba(61, 214, 195, 0.4);
-      padding: 10px 18px;
-      border-radius: var(--radius-full);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      display: flex;
+      inset: 0;
+      background: rgba(3, 6, 12, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      display: none;
       align-items: center;
-      gap: 16px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 20px var(--accent-glow);
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      justify-content: center;
+      padding: 20px;
     }
 
-    .sticky-bar.visible {
-      transform: translateX(-50%) translateY(0);
+    .install-modal-backdrop.active {
+      display: flex;
     }
 
-    .sticky-text {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text);
-      white-space: nowrap;
+    .install-modal-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      max-width: 480px;
+      width: 100%;
+      position: relative;
     }
 
-    .sticky-text em {
-      font-style: normal;
-      color: var(--accent);
+    .install-modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    /* Respect Prefers Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+      * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      #bg-canvas {
+        display: none;
+      }
     }
   </style>
 </head>
@@ -1377,87 +1159,72 @@
 
   <!-- Ambient Canvas Background -->
   <canvas id="bg-canvas"></canvas>
-  <div class="ambient-glow"></div>
+
+  <!-- Point 2: Scroll-Driven Summit Ascent Tracker -->
+  <div class="summit-tracker-rail" id="summit-rail" aria-hidden="true">
+    <div class="summit-hiker-thumb" id="summit-hiker">
+      <span class="summit-hiker-label" id="summit-hiker-label">Day 1</span>
+    </div>
+  </div>
 
   <!-- Header -->
   <header>
     <div class="container">
       <div class="nav-wrap">
-        <a href="https://nimratsingh217.github.io/winter-arc/" target="_blank" rel="noopener noreferrer" class="brand">
+        <a href="#hero" class="brand">
           <div class="brand-icon">▲</div>
           <span class="brand-name">90-DAY <em>WINTER ARC</em></span>
         </a>
 
         <ul class="nav-links">
+          <li><a href="#film">The Film</a></li>
+          <li><a href="#screens">Screenshots</a></li>
+          <li><a href="#different">Why It's Different</a></li>
+          <li><a href="#phases">3 Phases</a></li>
           <li><a href="#features">Features</a></li>
-          <li><a href="#pillars">5 Pillars</a></li>
-          <li><a href="#visuals">3D Summit</a></li>
-          <li><a href="#ergonomics">PWA & Print</a></li>
           <li><a href="#faq">FAQ</a></li>
         </ul>
 
         <div class="nav-actions">
-          <button id="sound-btn" class="btn-sound" title="Toggle procedural ambient soundscape">
+          <button id="sound-btn" class="btn-sound" title="Toggle sound feedback">
             <span id="sound-icon">🔊</span>
-            <span id="sound-label">Sound Ambient</span>
+            <span id="sound-label">Sound</span>
           </button>
-          <button onclick="handleLaunchApp(event)" class="btn-cta btn-launch-app" style="padding: 8px 14px; font-size: 13px;">
-            ▲ Launch App
-          </button>
-          <a href="https://nimratsingh217.github.io/winter-arc/" target="_blank" rel="noopener noreferrer" class="btn-cta btn-launch-web" style="padding: 8px 14px; font-size: 13px;">
-            🌐 Launch Website
+          <a id="nav-cta" href="#" class="btn-primary-cta">
+            START YOUR WINTER ARC →
           </a>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- Hero Section -->
   <main>
-    <section class="hero">
+    <!-- Task 6: Hero Section -->
+    <section class="hero" id="hero">
       <div class="container">
-        
         <div class="badge-pill">
-          <span class="pulse"></span>
-          90-Day Discipline Protocol · 100% Free & Open Source
+          90-Day Challenge · Free to Use · Private
         </div>
 
         <h1 class="hero-title">
-          90 Days In The Dark.<br>
-          <span class="accent-text">Emerge Unrecognizable.</span>
+          90 DAYS. ONE CHALLENGE.<br>
+          <span class="accent-text">A BETTER VERSION OF YOU.</span>
         </h1>
 
         <p class="hero-sub">
-          When the cold sets in, the weak hibernate. The disciplined build. Track five relentless pillars — Nutrition, Gym, Hygiene, Mind, and DSA — wrapped in procedural ambient audio, 3D summit visualizations, and absolute local privacy.
+          Winter Arc is a 90-day personal transformation challenge designed to help you build discipline, consistency and better habits. Starts the day you do.
         </p>
 
         <div class="hero-ctas">
-          <button onclick="handleLaunchApp(event)" class="btn-cta btn-launch-app" style="padding: 12px 26px;">
-            <div class="launch-btn-inner">
-              <span class="launch-icon">▲</span>
-              <div class="launch-text-wrap">
-                <span class="launch-main" style="font-size: 15px;">Launch App</span>
-                <span class="launch-sub">PWA / Standalone</span>
-              </div>
-            </div>
-          </button>
-
-          <a href="https://nimratsingh217.github.io/winter-arc/" target="_blank" rel="noopener noreferrer" class="btn-cta btn-launch-web" style="padding: 12px 26px;">
-            <div class="launch-btn-inner">
-              <span class="launch-icon">🌐</span>
-              <div class="launch-text-wrap">
-                <span class="launch-main" style="font-size: 15px;">Launch Website</span>
-                <span class="launch-sub">Open in Chrome Tab</span>
-              </div>
-            </div>
-          </a>
-
-          <a href="https://github.com/nimratsingh217/winter-arc" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="padding: 12px 20px; font-size: 14px;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-            </svg>
-            <span>GitHub</span>
-          </a>
+          <div class="hero-btn-row">
+            <a id="hero-cta" href="#" class="btn-primary-cta" style="padding: 14px 28px; font-size: 15px;">
+              START YOUR WINTER ARC →
+            </a>
+            <a href="#film" class="btn-ghost" style="padding: 14px 24px; font-size: 15px;">
+              WATCH THE FILM (35 SEC)
+            </a>
+          </div>
+          <button class="install-link" onclick="openInstallModal()">How to install it on phone or desktop</button>
         </div>
 
         <div class="hero-stats">
@@ -1466,691 +1233,745 @@
             <span class="hero-stat-lbl">Days Protocol</span>
           </div>
           <div class="hero-stat-item">
+            <span class="hero-stat-val">12</span>
+            <span class="hero-stat-lbl">Daily Habits</span>
+          </div>
+          <div class="hero-stat-item">
             <span class="hero-stat-val">5</span>
             <span class="hero-stat-lbl">Core Pillars</span>
           </div>
           <div class="hero-stat-item">
             <span class="hero-stat-val">100%</span>
-            <span class="hero-stat-lbl">Offline & Private</span>
-          </div>
-          <div class="hero-stat-item">
-            <span class="hero-stat-val">$0</span>
-            <span class="hero-stat-lbl">Free Forever</span>
+            <span class="hero-stat-lbl">On-Device Storage</span>
           </div>
         </div>
-
-        <!-- Interactive Hero Card Preview -->
-        <div class="app-preview-wrap">
-          <div class="preview-card">
-            <div class="preview-card-glow"></div>
-            
-            <div class="preview-header">
-              <div class="preview-title">
-                Interactive Protocol Preview · <em>Try It Now</em>
-              </div>
-              <div class="preview-tags">
-                <span class="preview-tag live">● Live Interactive Demo</span>
-                <span class="preview-tag">Day 1 / 90</span>
-              </div>
-            </div>
-
-            <div class="interactive-demo">
-              <!-- Left: Checklist -->
-              <div>
-                <div class="checklist-title">
-                  <span>Daily Execution Checklist</span>
-                  <span id="checked-counter" class="mono" style="color: var(--accent);">0 / 8 Complete</span>
-                </div>
-
-                <div class="checklist-items" id="demo-checklist">
-                  <div class="check-row" data-target="0">
-                    <div class="check-label">
-                      <span class="check-pill pill-nutrition">Nutrition</span>
-                      <span>Overnight Oats & High-Protein Fuel</span>
-                    </div>
-                    <div class="check-box">✓</div>
-                  </div>
-
-                  <div class="check-row" data-target="1">
-                    <div class="check-label">
-                      <span class="check-pill pill-nutrition">Fuel</span>
-                      <span>Hit 100g+ Protein & 2.5–3L Water</span>
-                    </div>
-                    <div class="check-box">✓</div>
-                  </div>
-
-                  <div class="check-row" data-target="2">
-                    <div class="check-label">
-                      <span class="check-pill pill-gym">Gym</span>
-                      <span>Heavy Training Session / Active Recovery</span>
-                    </div>
-                    <div class="check-box">✓</div>
-                  </div>
-
-                  <div class="check-row" data-target="3">
-                    <div class="check-label">
-                      <span class="check-pill pill-hygiene">Hygiene</span>
-                      <span>AM Facewash + SPF & PM Recovery</span>
-                    </div>
-                    <div class="check-box">✓</div>
-                  </div>
-
-                  <div class="check-row" data-target="4">
-                    <div class="check-label">
-                      <span class="check-pill pill-mind">Focus</span>
-                      <span>Dopamine Detox & Mind Discipline (No Fap)</span>
-                    </div>
-                    <div class="check-box">✓</div>
-                  </div>
-
-                  <div class="check-row" data-target="5">
-                    <div class="check-label">
-                      <span class="check-pill pill-skill">Career</span>
-                      <span>1 Significant Career / High-Leverage Move</span>
-                    </div>
-                    <div class="check-box">✓</div>
-                  </div>
-
-                  <div class="check-row" data-target="6">
-                    <div class="check-label">
-                      <span class="check-pill pill-skill">DSA</span>
-                      <span>Solve LeetCode / Grinding Algorithms</span>
-                    </div>
-                    <div class="check-box">✓</div>
-                  </div>
-
-                  <div class="check-row" data-target="7">
-                    <div class="check-label">
-                      <span class="check-pill pill-hygiene">Night</span>
-                      <span>2-Minute Night Dental Care & Shut Down</span>
-                    </div>
-                    <div class="check-box">✓</div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Right: Score Ring & Feedback -->
-              <div class="status-panel">
-                <div class="status-score-ring">
-                  <svg viewBox="0 0 120 120">
-                    <circle class="bg" cx="60" cy="60" r="54"></circle>
-                    <circle id="demo-progress-circle" class="progress" cx="60" cy="60" r="54"></circle>
-                  </svg>
-                  <div class="status-score-text">
-                    <span id="demo-percentage">0</span>%
-                  </div>
-                </div>
-
-                <div id="demo-status-badge" class="status-badge">
-                  Incomplete Day
-                </div>
-
-                <p id="demo-status-desc" class="status-desc">
-                  Tap tasks above to simulate your daily log. Reach 75%+ to trigger a <strong>SOLID DAY</strong> victory state.
-                </p>
-              </div>
-            </div>
-
-            <div class="preview-bottom-bar">
-              <div>
-                💡 <em>"Consistency over perfection. Miss a day, never miss twice."</em>
-              </div>
-              <a href="https://nimratsingh217.github.io/winter-arc/" target="_blank" rel="noopener noreferrer" class="preview-live-link">
-                Open full 90-day tracker in app →
-              </a>
-            </div>
-
-          </div>
-        </div>
-
       </div>
     </section>
 
-    <!-- The Winter Arc Philosophy: Contrast -->
-    <section id="features">
+    <!-- Point 1: Interactive Playable Monster Fight Arena -->
+    <section id="demo" style="padding-top: 10px;">
+      <div class="container">
+        <div class="arena-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--surface-border); padding-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+            <div>
+              <span class="section-eyebrow" style="margin-bottom: 4px;">Interactive Demo</span>
+              <h3 style="font-size: 17px; font-weight: 800;">Battle the Daily Monster</h3>
+            </div>
+            <span class="mono" style="font-size: 12px; color: var(--accent);" id="arena-counter">0 / 6 Completed</span>
+          </div>
+
+          <div class="arena-grid">
+            <div class="check-list-arena" id="arena-checklist">
+              <div class="check-item-arena" data-damage="17">
+                <span>Breakfast & 100g+ Protein</span>
+                <span class="check-box-icon">✓</span>
+              </div>
+              <div class="check-item-arena" data-damage="17">
+                <span>2.5–3L Water through the day</span>
+                <span class="check-box-icon">✓</span>
+              </div>
+              <div class="check-item-arena" data-damage="17">
+                <span>Gym session or scheduled rest</span>
+                <span class="check-box-icon">✓</span>
+              </div>
+              <div class="check-item-arena" data-damage="17">
+                <span>AM & PM Skin cleansing</span>
+                <span class="check-box-icon">✓</span>
+              </div>
+              <div class="check-item-arena" data-damage="16">
+                <span>Mind & Discipline (Self-restraint)</span>
+                <span class="check-box-icon">✓</span>
+              </div>
+              <div class="check-item-arena" data-damage="16">
+                <span>DSA study session & timer</span>
+                <span class="check-box-icon">✓</span>
+              </div>
+            </div>
+
+            <div class="monster-stage">
+              <div class="monster-preview-box" id="monster-box">
+                <!-- SVG Voxel Dino -->
+                <svg id="monster-svg" width="90" height="90" viewBox="0 0 100 100" fill="none">
+                  <rect x="35" y="20" width="30" height="25" fill="#3dd6c3" rx="2"/>
+                  <rect x="55" y="26" width="6" height="6" fill="#070a10"/>
+                  <rect x="25" y="42" width="45" height="30" fill="#2fd1b0" rx="3"/>
+                  <rect x="15" y="48" width="12" height="10" fill="#26aa8f"/>
+                  <rect x="30" y="72" width="10" height="15" fill="#26aa8f"/>
+                  <rect x="52" y="72" width="10" height="15" fill="#26aa8f"/>
+                </svg>
+              </div>
+
+              <div class="mono" style="font-size: 13px; font-weight: 700;" id="monster-name">Daily Voxel Dinosaur</div>
+              <div class="monster-hp-bar">
+                <div class="monster-hp-fill" id="monster-hp-fill"></div>
+              </div>
+              <p class="mono" style="font-size: 11px; color: var(--text-muted);" id="monster-hp-text">Monster HP: 100%</p>
+              <p style="font-size: 12px; color: var(--text-dim); margin-top: 8px;" id="monster-status-note">
+                Tick habits to damage the monster. Complete your selected habits to defeat it.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Task 11: The Film Section -->
+    <section id="film">
       <div class="container">
         <div class="section-header">
-          <span class="section-eyebrow">The Manifesto</span>
-          <h2 class="section-title">Built For The Relentless Few</h2>
+          <span class="section-eyebrow">Visual Preview</span>
+          <h2 class="section-title">Watch the Film</h2>
           <p class="section-subtitle">
-            Most habit trackers treat discipline like a software subscription. Winter Arc treats it like a winter campaign.
+            A 35-second introduction to the 90-Day Winter Arc challenge and its daily rhythms.
           </p>
         </div>
 
-        <div class="contrast-grid">
-          <div class="contrast-card bad">
-            <div class="contrast-header">
-              <div class="contrast-icon">✕</div>
-              <div class="contrast-title">Typical Habit Apps</div>
-            </div>
-            <ul class="contrast-list">
-              <li>
-                <span>⚠️</span>
-                <span><strong>$15/Month Subscriptions</strong> — Pay-walled basic streak counters and arbitrary feature locks.</span>
-              </li>
-              <li>
-                <span>⚠️</span>
-                <span><strong>Account Creation & Surveillance</strong> — Demands your email, sends marketing spam, sells behavior data.</span>
-              </li>
-              <li>
-                <span>⚠️</span>
-                <span><strong>No Finite Finish Line</strong> — Endless open-ended loops with zero urgency or seasonal crystallization.</span>
-              </li>
-              <li>
-                <span>⚠️</span>
-                <span><strong>Passive & Distracting</strong> — Overloaded with gamified badges, social feeds, and intrusive notification bells.</span>
-              </li>
-            </ul>
+        <div class="film-container">
+          <div class="film-poster" id="film-poster">
+            <span class="badge-pill" style="margin-bottom: 12px;">35-Second Film</span>
+            <h3 style="font-size: clamp(22px, 3.5vw, 36px); font-weight: 800; max-width: 500px;">
+              Your Next 90 Days.
+            </h3>
+            <p style="color: var(--text-muted); font-size: 14px; margin-top: 6px;">
+              Built-in synthesised soundscape & visual progression.
+            </p>
+            <button class="film-play-btn" onclick="startFilm()">
+              <span>▶ WATCH THE FILM (35 SEC)</span>
+            </button>
+          </div>
+          <div id="film-slot" style="width: 100%; height: 100%;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Task 10: "See it in action" Real Screenshot Gallery -->
+    <section id="screens">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Real Interface</span>
+          <h2 class="section-title">See It in Action</h2>
+          <p class="section-subtitle">
+            Explore the tracker's actual interface across desktop and mobile. Click any image to expand.
+          </p>
+        </div>
+
+        <div class="gallery-wrap">
+          <div class="gallery-tabs">
+            <button class="gallery-tab active" data-img="assets/screens/grid.jpg" data-cap="Full 90-day master grid with 3 phases and weekly progress bars. Sample data.">
+              90-Day Grid
+            </button>
+            <button class="gallery-tab" data-img="assets/screens/summit.jpg" data-cap="The Summit: a mountain visual where weather reflects your last 3 days of consistency. Sample data.">
+              The Summit
+            </button>
+            <button class="gallery-tab" data-img="assets/screens/monsters.jpg" data-cap="Weekly Monster challenge: defeat the crimson boss by hitting all weekly targets. Sample data.">
+              Monster Challenges
+            </button>
+            <button class="gallery-tab" data-img="assets/screens/city.jpg" data-cap="City of Days: a 3D procedural skyline with one building for each completed day. Sample data.">
+              City of Days
+            </button>
+            <button class="gallery-tab" data-img="assets/screens/streaks.jpg" data-cap="Streaks & summary tab: current and best streaks, solid days, and weekly review. Sample data.">
+              Streaks & Summary
+            </button>
+            <button class="gallery-tab" data-img="assets/screens/phone-today.jpg" data-cap="Mobile Today view: focused daily checklist with quick navigation. Sample data.">
+              Mobile Today View
+            </button>
           </div>
 
-          <div class="contrast-card good">
-            <div class="contrast-header">
-              <div class="contrast-icon">✓</div>
-              <div class="contrast-title">The 90-Day Winter Arc</div>
+          <div class="gallery-viewport">
+            <div class="gallery-frame" onclick="openLightbox()">
+              <img id="gallery-main-img" class="gallery-img" src="assets/screens/grid.jpg" alt="Winter Arc 90-day master grid interface showing habits, phases and progress bars" loading="lazy">
             </div>
-            <ul class="contrast-list">
-              <li>
-                <span>🛡️</span>
-                <span><strong>100% Free & Open Source</strong> — No subscriptions, no ads, no microtransactions ever.</span>
-              </li>
-              <li>
-                <span>🔒</span>
-                <span><strong>Zero Sign-In & Offline LocalStorage</strong> — Your photos and metrics never leave your device.</span>
-              </li>
-              <li>
-                <span>⏳</span>
-                <span><strong>Fixed 90-Day Campaign</strong> — 3 sharp 30-day phases designed to produce an undeniable physical & mental shift.</span>
-              </li>
-              <li>
-                <span>🏔️</span>
-                <span><strong>Built-In Audio & 3D Atmosphere</strong> — Web Audio generative drone, DSA stopwatch, and dynamic 3D mountain summit.</span>
-              </li>
-            </ul>
+            <p class="gallery-caption" id="gallery-caption-text">
+              Full 90-day master grid with 3 phases and weekly progress bars. Sample data.
+            </p>
+          </div>
+
+          <!-- Task 7: CTA after screenshots -->
+          <div class="gallery-cta-row">
+            <a id="gallery-cta" href="#" class="btn-primary-cta">
+              START YOUR WINTER ARC →
+            </a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 3 Phases Section -->
-    <section style="background: rgba(10, 16, 29, 0.4);">
+    <!-- Task 5: "Why Winter Arc is different" (4 Cards) -->
+    <section id="different" style="background: var(--bg-alt);">
       <div class="container">
         <div class="section-header">
-          <span class="section-eyebrow">The Campaign Timeline</span>
-          <h2 class="section-title">Three Phases of Metamorphosis</h2>
+          <span class="section-eyebrow">Design Philosophy</span>
+          <h2 class="section-title">Why Winter Arc Is Different</h2>
           <p class="section-subtitle">
-            A structured 90-day trajectory. Break bad loops in Foundation, build heavy momentum, and peak into the new year.
+            A tool built for personal consistency, free from modern software bloat.
+          </p>
+        </div>
+
+        <div class="diff-grid">
+          <div class="diff-card">
+            <div class="diff-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <h3 class="diff-title">Free to Use</h3>
+            <p class="diff-desc">
+              All features are completely open and accessible to everyone. No payment walls, trial periods, or feature restrictions.
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <div class="diff-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="7" r="4"/><path d="M5.5 21a8.5 8.5 0 0 1 13 0"/></svg>
+            </div>
+            <h3 class="diff-title">No Account or Sign-In</h3>
+            <p class="diff-desc">
+              Start immediately without creating an account, confirming emails, or providing personal credentials. Just open and begin.
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <div class="diff-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3 class="diff-title">Your Data Stays on Your Device</h3>
+            <p class="diff-desc">
+              Logs and images are stored strictly in your browser storage (localStorage and IndexedDB). Includes one-click JSON backup export and import.
+            </p>
+          </div>
+
+          <div class="diff-card">
+            <div class="diff-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <h3 class="diff-title">A Real Finish Line</h3>
+            <p class="diff-desc">
+              Unlike endless habit apps, Winter Arc has a defined 90-day timeline divided into 3 structured phases to help you finish what you start.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Task 1: "Your Next 90 Days" (3 Phases, Date-Agnostic) -->
+    <section id="phases">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">The 90-Day Journey</span>
+          <h2 class="section-title">Three Phases of Progression</h2>
+          <p class="section-subtitle">
+            Your next 90 days are split into three 30-day blocks, moving from habit formation to high consistency.
           </p>
         </div>
 
         <div class="phases-wrap">
-          <div class="phase-card phase-1">
+          <div class="phase-card">
             <span class="phase-badge">Phase 01</span>
-            <h3 class="phase-name">Foundation</h3>
-            <span class="phase-dates">Days 1 – 30</span>
+            <h3 class="phase-title">Foundation</h3>
+            <span class="phase-days">Day 1 → Day 30</span>
             <p class="phase-desc">
-              Shatter inertia. Eliminate dopamine distractions, enforce strict wake-up hours, establish gut-level nutrition routines, and train consistently without excuse.
+              Build the routine. Focus on showing up every single day, establishing hydration and nutrition baselines, and getting your workouts in order.
             </p>
           </div>
 
-          <div class="phase-card phase-2">
+          <div class="phase-card">
             <span class="phase-badge">Phase 02</span>
-            <h3 class="phase-name">Build</h3>
-            <span class="phase-dates">Days 31 – 60</span>
+            <h3 class="phase-title">Build</h3>
+            <span class="phase-days">Day 31 → Day 60</span>
             <p class="phase-desc">
-              Compounding velocity. Progressive overload in the weight room, deep-work flow state during DSA study, and visible physical changes begin taking shape.
+              Raise consistency. Protect your streaks, steady your training volume, stay regular with daily study, and eliminate unneeded friction.
             </p>
           </div>
 
-          <div class="phase-card phase-3">
+          <div class="phase-card">
             <span class="phase-badge">Phase 03</span>
-            <h3 class="phase-name">Peak</h3>
-            <span class="phase-dates">Days 61 – 90</span>
+            <h3 class="phase-title">Peak</h3>
+            <span class="phase-days">Day 61 → Day 90</span>
             <p class="phase-desc">
-              The summit approach. Total mental fortitude, shredded body composition, career and code breakthroughs, emerging completely unrecognizable on New Year's Day.
+              Finish strong. Maintain your standard through the final stretch, defeat your weekly bosses, and reach the summit on Day 90.
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 5 Pillars Section -->
-    <section id="pillars">
+    <!-- Task 6: 5 Core Pillars (Inclusive, Calm) -->
+    <section id="pillars" style="background: var(--bg-alt);">
       <div class="container">
         <div class="section-header">
-          <span class="section-eyebrow">Non-Negotiable Fundamentals</span>
+          <span class="section-eyebrow">Habit Structure</span>
           <h2 class="section-title">The 5 Core Pillars</h2>
           <p class="section-subtitle">
-            Every day is evaluated against 12 precise metrics structured under 5 timeless pillars of masculine development.
+            Twelve daily habits grouped into five practical areas of daily discipline.
           </p>
         </div>
 
         <div class="pillars-grid">
-          <div class="pillar-card" style="--p-color: #2fd1b0;">
-            <div class="pillar-icon">🥗</div>
-            <h3 class="pillar-title">Nutrition & Fuel</h3>
-            <div class="pillar-target">2,500 kcal · 100g+ Protein</div>
-            <p class="pillar-body">
-              Structured breakfast, whole-food lunch, pre-workout timing, and minimum 2.5–3 liters of water daily.
+          <div class="pillar-card">
+            <div class="pillar-line-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8zM6 1v3M10 1v3M14 1v3"/></svg>
+            </div>
+            <h3 class="pillar-title">Nutrition</h3>
+            <p class="pillar-desc">
+              Breakfast, lunch, pre-workout timing, hitting your protein target (100g+), and daily hydration (2.5–3L).
             </p>
           </div>
 
-          <div class="pillar-card" style="--p-color: #4ade80;">
-            <div class="pillar-icon">🏋️</div>
+          <div class="pillar-card">
+            <div class="pillar-line-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6.5 6.5 11 11M3 21l3-3M18 6l3-3M2 13l4-4M15 20l4-4"/></svg>
+            </div>
             <h3 class="pillar-title">Gym & Rest</h3>
-            <div class="pillar-target">4–5× Lifting / Week</div>
-            <p class="pillar-body">
-              Heavy resistance training. Tap for completed gym session; hold for 1 second to log scheduled active recovery.
+            <p class="pillar-desc">
+              Physical training 4–5 times a week. Tap for gym completed, or hold to log a scheduled rest day.
             </p>
           </div>
 
-          <div class="pillar-card" style="--p-color: #5b8cff;">
-            <div class="pillar-icon">✨</div>
-            <h3 class="pillar-title">Skin & Grooming</h3>
-            <div class="pillar-target">AM / PM Routine + Dental</div>
-            <p class="pillar-body">
-              Morning facewash, Vitamin C, moisturizer and SPF. Post-workout face cleanse and 2-minute nightly dental discipline.
+          <div class="pillar-card">
+            <div class="pillar-line-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07 19.07 4.93"/></svg>
+            </div>
+            <h3 class="pillar-title">Skin & Hygiene</h3>
+            <p class="pillar-desc">
+              Morning face care, post-workout cleanse, and consistent nightly tooth brushing without skipping.
             </p>
           </div>
 
-          <div class="pillar-card" style="--p-color: #b07cff;">
-            <div class="pillar-icon">🧠</div>
-            <h3 class="pillar-title">Mind & Focus</h3>
-            <div class="pillar-target">Dopamine Mastery (No Fap)</div>
-            <p class="pillar-body">
-              Protect your sexual energy and dopamine receptors. Clear mental fog, heighten drive, and refuse cheap short-term pleasure.
+          <div class="pillar-card">
+            <div class="pillar-line-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <h3 class="pillar-title">Mind & Discipline</h3>
+            <p class="pillar-desc">
+              A personal self-discipline habit you tick each night. Use it if it matters to you.
             </p>
           </div>
 
-          <div class="pillar-card" style="--p-color: #ff6b8b;">
-            <div class="pillar-icon">⚡</div>
+          <div class="pillar-card">
+            <div class="pillar-line-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
             <h3 class="pillar-title">Skills & DSA</h3>
-            <div class="pillar-target">1 Move + LeetCode Timer</div>
-            <p class="pillar-body">
-              One career-compounding victory daily plus active algorithm problem solving with the built-in precision stopwatch.
+            <p class="pillar-desc">
+              One productive career action daily plus dedicated DSA problem solving with the built-in timer.
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Innovation & Standout Features Showcase -->
-    <section id="visuals" style="background: rgba(10, 16, 29, 0.4);">
+    <!-- Point 6: Monster Showcase Gallery -->
+    <section id="monsters">
       <div class="container">
         <div class="section-header">
-          <span class="section-eyebrow">Beyond Ordinary Trackers</span>
-          <h2 class="section-title">Unique Atmospheric Engineering</h2>
+          <span class="section-eyebrow">Gamified Motivation</span>
+          <h2 class="section-title">The Monster Challenges</h2>
           <p class="section-subtitle">
-            Crafted with custom 3D canvas rendering, Web Audio synthesis, and private IndexedDB photo streams.
+            Defeat voxel bosses by hitting your daily and weekly habits.
           </p>
         </div>
 
-        <div class="features-showcase">
-          
-          <!-- Summit 3D Visualizer -->
-          <div class="showcase-card featured">
-            <div>
-              <span class="showcase-eyebrow">Canvas 3D Engine · Weather Linked to Consistency</span>
-              <h3 class="showcase-title">The Summit & City Dynamic Visualizers</h3>
-              <p class="showcase-desc">
-                Your discipline is mirrored in real time. When your streaks and solid days are high, the mountain summit clears into a crisp alpine sunrise. Fall behind, and a heavy blizzard rolls over the peak. Built entirely in lightweight procedural canvas without heavy 3D frameworks.
-              </p>
+        <div class="monster-showcase-grid">
+          <div class="monster-card">
+            <span class="monster-badge-top badge-daily">Daily Monster</span>
+            <div style="width: 80px; height: 80px; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center;">
+              <svg width="70" height="70" viewBox="0 0 100 100" fill="none">
+                <rect x="35" y="20" width="30" height="25" fill="#3dd6c3" rx="2"/>
+                <rect x="55" y="26" width="6" height="6" fill="#070a10"/>
+                <rect x="25" y="42" width="45" height="30" fill="#2fd1b0" rx="3"/>
+                <rect x="15" y="48" width="12" height="10" fill="#26aa8f"/>
+                <rect x="30" y="72" width="10" height="15" fill="#26aa8f"/>
+                <rect x="52" y="72" width="10" height="15" fill="#26aa8f"/>
+              </svg>
             </div>
-
-            <div class="showcase-visual">
-              <canvas id="summit-canvas"></canvas>
-              <div class="summit-controls">
-                <span class="summit-pill">Move cursor to pan camera</span>
-                <span class="summit-pill" style="color: var(--accent);">▲ Summit Mode Live</span>
-              </div>
-            </div>
+            <h3 style="font-size: 18px; margin-bottom: 8px;">Blue Voxel Dinosaur</h3>
+            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.55;">
+              A small blue voxel dinosaur. You choose which daily habits defeat it; tick them all to win. Tracks a total defeat counter on your summit map.
+            </p>
           </div>
 
-          <!-- Flipbook Photo Stream -->
-          <div class="showcase-card">
-            <div>
-              <span class="showcase-eyebrow">Client-Side IndexedDB Vault</span>
-              <h3 class="showcase-title">The Flipbook Transformation Stream</h3>
-              <p class="showcase-desc">
-                Log weekly physique check-ins directly in the app. Photos are compressed and stored locally in your browser's IndexedDB. Review your physical transformation as an interactive dynamic stream, with 1-click JSON backup export.
-              </p>
+          <div class="monster-card">
+            <span class="monster-badge-top badge-weekly">Weekly Boss</span>
+            <div style="width: 80px; height: 80px; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center;">
+              <svg width="70" height="70" viewBox="0 0 100 100" fill="none">
+                <rect x="32" y="18" width="36" height="30" fill="#ff4766" rx="2"/>
+                <rect x="36" y="8" width="6" height="12" fill="#d02543"/>
+                <rect x="46" y="8" width="6" height="12" fill="#d02543"/>
+                <rect x="56" y="26" width="6" height="6" fill="#facc15"/>
+                <rect x="22" y="45" width="52" height="32" fill="#e03250" rx="3"/>
+                <rect x="12" y="50" width="12" height="12" fill="#b01e36"/>
+                <rect x="30" y="74" width="12" height="16" fill="#b01e36"/>
+                <rect x="54" y="74" width="12" height="16" fill="#b01e36"/>
+              </svg>
             </div>
-
-            <div class="showcase-visual" style="flex-direction: column; padding: 24px; text-align: center;">
-              <div style="font-size: 38px; margin-bottom: 10px;">📸</div>
-              <div style="font-weight: 700; font-size: 15px; margin-bottom: 6px;">Zero Cloud Uploads</div>
-              <div style="font-size: 12px; color: var(--text-muted); max-width: 280px;">
-                Your photos remain 100% on your device. Complete anonymity and privacy.
-              </div>
-            </div>
+            <h3 style="font-size: 18px; margin-bottom: 8px;">Crimson Dragon Boss</h3>
+            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.55;">
+              A bigger crimson boss. Defeated each week by completing: 4 gym days, 5 days of 100g+ protein, 4 self-discipline days, 6 night teeth cleanings, and 4 DSA days.
+            </p>
           </div>
-
-          <!-- DSA Algorithm Stopwatch -->
-          <div class="showcase-card">
-            <div>
-              <span class="showcase-eyebrow">Dedicated Study Tool</span>
-              <h3 class="showcase-title">Integrated DSA Stopwatch</h3>
-              <p class="showcase-desc">
-                Stop juggling phone timers or separate websites. Launch your session, log algorithms solved, and track weekly cumulative study hours without leaving the protocol.
-              </p>
-            </div>
-
-            <div class="showcase-visual">
-              <div class="stopwatch-widget">
-                <div class="stopwatch-clock" id="demo-sw-clock">00:45:12</div>
-                <div class="stopwatch-btns">
-                  <button class="btn-sw" id="demo-sw-toggle">Start / Pause</button>
-                  <button class="btn-sw" id="demo-sw-reset" style="border-color: var(--surface-border); color: var(--text-muted);">Reset</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
         </div>
       </div>
     </section>
 
-    <!-- Ergonomics: Phone vs Print Sheet -->
-    <section id="ergonomics">
+    <!-- Task 12: Beyond the Checklist (Feature List) -->
+    <section id="features" style="background: var(--bg-alt);">
       <div class="container">
         <div class="section-header">
-          <span class="section-eyebrow">Dual Ergonomics</span>
-          <h2 class="section-title">Two Ways To Attack The Arc</h2>
+          <span class="section-eyebrow">Features</span>
+          <h2 class="section-title">Beyond the Checklist</h2>
           <p class="section-subtitle">
-            Whether you live on your smartphone or prefer a physical printout pinned above your desk.
+            Tools built directly into the tracker to support your consistency.
           </p>
         </div>
 
-        <div class="ergonomics-grid">
-          <div class="ergo-card">
-            <span class="ergo-pill">Mobile First PWA</span>
-            <h3 style="font-size: 24px; margin-bottom: 12px;">iOS & Android Native Feel</h3>
-            <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">
-              Add to Home Screen directly from Safari or Chrome. Instant tactile day navigation, quick-tap checkboxes, haptic-style sound confirmations, and full offline caching via Service Worker.
+        <div class="features-grid">
+          <div class="feature-card">
+            <svg class="feature-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
+            <h3 class="feature-title">90-Day Master Grid</h3>
+            <p class="feature-desc">
+              12 daily habits grouped under 5 pillars. A day counts as "solid" when you reach your target percentage (adjustable, default 75%).
             </p>
-            <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: #cfd8e8;">
-              <li>✓ One-tap "Today" quick jump</li>
-              <li>✓ Swipe / button day navigation</li>
-              <li>✓ Dark / Light theme slider</li>
-            </ul>
           </div>
 
-          <div class="ergo-card">
-            <span class="ergo-pill" style="background: rgba(91, 140, 255, 0.15); color: #5b8cff;">Print Ready</span>
-            <h3 style="font-size: 24px; margin-bottom: 12px;">Full A3 Landscape Wall Grid</h3>
-            <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">
-              Designed with tailored CSS <code>@media print</code> styles. Hit Print in your browser to generate a high-density, clean, monochrome 90-day checklist sheet to pin to your wall and tick with a physical pen.
+          <div class="feature-card">
+            <svg class="feature-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></svg>
+            <h3 class="feature-title">The Summit</h3>
+            <p class="feature-desc">
+              A mountain view where the weather and atmosphere follow your last 3 days of logged consistency.
             </p>
-            <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: #cfd8e8;">
-              <li>✓ Automatic landscape A3 pagination</li>
-              <li>✓ High-contrast ink optimization</li>
-              <li>✓ Complete 90-day view on a single sheet</li>
-            </ul>
+          </div>
+
+          <div class="feature-card">
+            <svg class="feature-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M8 10h.01M16 10h.01M8 14h.01M16 14h.01"/></svg>
+            <h3 class="feature-title">City of Days</h3>
+            <p class="feature-desc">
+              A 3D skyline visual with one building representing each day. Drag to rotate and explore your progress.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <svg class="feature-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <h3 class="feature-title">DSA Study Timer</h3>
+            <p class="feature-desc">
+              Start, pause, and reset stopwatch dedicated to problem-solving, with weekly study totals saved automatically.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <svg class="feature-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            <h3 class="feature-title">Streaks & Habit Ranking</h3>
+            <p class="feature-desc">
+              Tracks your current and best streaks, shows weekly summaries, and ranks your strongest and weakest habits over time.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <svg class="feature-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <h3 class="feature-title">Flipbook Photo Collage</h3>
+            <p class="feature-desc">
+              Photo collage stored only on your device, with export/import backup so your privacy is maintained.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <svg class="feature-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+            <h3 class="feature-title">Theme Slider & Audio</h3>
+            <p class="feature-desc">
+              Light and dark theme slider with sound feedback and a dedicated mute button.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <svg class="feature-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            <h3 class="feature-title">Printable Sheet & PWA</h3>
+            <p class="feature-desc">
+              Printable 90-day sheet for wall tracking. Installable on phone and desktop; works offline after your first visit.
+            </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section id="faq">
+    <!-- Point 4: Personalized 90-Day Plan Card Generator -->
+    <section id="generator">
       <div class="container">
         <div class="section-header">
-          <span class="section-eyebrow">Got Questions?</span>
+          <span class="section-eyebrow">Personal Commitment</span>
+          <h2 class="section-title">Generate Your 90-Day Plan</h2>
+          <p class="section-subtitle">
+            Create a date-agnostic commitment card to save or keep above your desk.
+          </p>
+        </div>
+
+        <div class="generator-card">
+          <label for="plan-name" style="font-size: 13px; font-weight: 600; display: block; margin-bottom: 6px;">Your Name or Handle</label>
+          <input type="text" id="plan-name" class="gen-input" placeholder="e.g. Alex" maxlength="30" value="Participant">
+
+          <label for="plan-focus" style="font-size: 13px; font-weight: 600; display: block; margin-bottom: 6px;">Primary Skill Focus</label>
+          <input type="text" id="plan-focus" class="gen-input" placeholder="e.g. Data Structures & Algorithms, Systems, Reading" value="Data Structures & Algorithms">
+
+          <div class="gen-result-card" id="plan-card-preview">
+            <div style="color: var(--accent); font-weight: 700; margin-bottom: 4px;">[ 90-DAY WINTER ARC COMMITMENT ]</div>
+            <div>PARTICIPANT: <span id="card-name" style="color: var(--text);">Participant</span></div>
+            <div>PRIMARY SKILL: <span id="card-focus" style="color: var(--text);">Data Structures & Algorithms</span></div>
+            <div>TIMELINE: Day 1 → Day 90 (3 Phases: Foundation · Build · Peak)</div>
+            <div>STATUS: Ready to begin. Starts the day you do.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Task 1: FAQ Section (Date-Agnostic) -->
+    <section id="faq" style="background: var(--bg-alt);">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Common Questions</span>
           <h2 class="section-title">Frequently Asked Questions</h2>
         </div>
 
         <div class="faq-wrap">
           <div class="faq-item active">
             <div class="faq-question">
-              <span>What exactly is the "Winter Arc"?</span>
+              <span>What is the Winter Arc?</span>
               <span class="faq-chevron">+</span>
             </div>
             <div class="faq-answer">
-              The Winter Arc is a seasonal mental model where you commit to 90 continuous days of disciplined self-improvement throughout late autumn and winter. While others slow down during the holidays, you cultivate intense focus across fitness, intellect, and career.
+              Winter Arc is a 90-day personal transformation challenge designed to help you build discipline, consistency, and better daily habits. You can start the challenge on any day you choose—Day 1 begins whenever you are ready.
             </div>
           </div>
 
           <div class="faq-item">
             <div class="faq-question">
-              <span>Is it really 100% free with no hidden charges?</span>
+              <span>Is Winter Arc completely free?</span>
               <span class="faq-chevron">+</span>
             </div>
             <div class="faq-answer">
-              Yes, completely. There are no premium tiers, no recurring subscriptions, and no upsells. It is built as an open-source project by and for individuals striving for personal mastery.
+              Yes, it is completely free to use. There are no paid tiers, subscriptions, or hidden charges.
             </div>
           </div>
 
           <div class="faq-item">
             <div class="faq-question">
-              <span>Where is my personal tracking data stored?</span>
+              <span>Where is my tracking data saved?</span>
               <span class="faq-chevron">+</span>
             </div>
             <div class="faq-answer">
-              All checkbox logs, weight trends, and DSA progress are saved directly into your web browser's <code>localStorage</code>. Flipbook photos are stored inside <code>IndexedDB</code>. Nothing ever gets transmitted to any server. You can export a JSON backup at any time.
+              All habit ticks, streaks, and timer records are stored directly in your browser's local storage. Flipbook photos are saved in on-device IndexedDB. Nothing is uploaded to a remote server, and you can export a JSON backup at any time.
             </div>
           </div>
 
           <div class="faq-item">
             <div class="faq-question">
-              <span>How do I install it on my phone?</span>
+              <span>How do I install the tracker as an app?</span>
               <span class="faq-chevron">+</span>
             </div>
             <div class="faq-answer">
-              Open <strong>https://nimratsingh217.github.io/winter-arc/</strong> on your mobile browser. On iOS Safari, tap the Share icon and select <em>"Add to Home Screen"</em>. On Android Chrome, tap the three dots and select <em>"Install App"</em>. It will launch full-screen just like a native app.
+              On Google Chrome desktop, click the Install button on the right side of the address bar. On iOS Safari, tap the Share icon and select "Add to Home Screen". On Android Chrome, tap the three dots and select "Install app".
             </div>
           </div>
 
           <div class="faq-item">
             <div class="faq-question">
-              <span>What happens if I miss a single day?</span>
+              <span>What if I miss a day during the 90 days?</span>
               <span class="faq-chevron">+</span>
             </div>
             <div class="faq-answer">
-              The core maxim of the Winter Arc is: <em>"Consistency over perfection. Miss a day, never miss twice."</em> Do not restart from Day 1. Accept the imperfect day, log it honestly, and lock back in the very next morning.
+              The core principle is consistency over perfection: miss a day, never miss twice. If you miss a day, keep moving forward without restarting from Day 1.
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Final CTA Banner -->
+    <!-- Task 1 & 7: Final CTA Banner -->
     <section>
       <div class="container">
-        <div class="cta-banner">
-          <h2>Your 90 Days Begin Today.</h2>
-          <p>
-            Nobody is watching. No one will do the reps or write the code for you. Enter the Winter Arc and see what you are truly capable of.
+        <div class="final-cta-box">
+          <h2 style="font-size: clamp(28px, 4.5vw, 46px); font-weight: 900; text-transform: uppercase;">
+            Your Next 90 Days
+          </h2>
+          <p class="final-cta-sub">
+            Your next 90 days start with one decision.
           </p>
 
-          <!-- Dual Launch Options -->
-          <div class="dual-launch-wrap">
-            <button onclick="handleLaunchApp(event)" class="btn-cta btn-launch-app" style="padding: 16px 34px;">
-              <div class="launch-btn-inner">
-                <span class="launch-icon">▲</span>
-                <div class="launch-text-wrap">
-                  <span class="launch-main" style="font-size: 17px;">Launch App</span>
-                  <span class="launch-sub">PWA / Standalone Window</span>
-                </div>
-              </div>
-            </button>
-
-            <a href="https://nimratsingh217.github.io/winter-arc/" target="_blank" rel="noopener noreferrer" class="btn-cta btn-launch-web" style="padding: 16px 34px;">
-              <div class="launch-btn-inner">
-                <span class="launch-icon">🌐</span>
-                <div class="launch-text-wrap">
-                  <span class="launch-main" style="font-size: 17px;">Launch Website</span>
-                  <span class="launch-sub">Use on Chrome Tab</span>
-                </div>
-              </div>
+          <div>
+            <a id="final-cta" href="#" class="btn-primary-cta" style="padding: 14px 32px; font-size: 15px;">
+              START YOUR WINTER ARC →
             </a>
           </div>
 
-          <!-- Secondary GitHub link -->
-          <div style="margin-top: 24px;">
-            <a href="https://github.com/nimratsingh217/winter-arc" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="padding: 10px 22px; font-size: 13px;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-              </svg>
-              <span>View Source Code On GitHub</span>
-            </a>
+          <div style="margin-top: 14px;">
+            <button class="install-link" onclick="openInstallModal()">How to install it on phone or desktop</button>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Sticky Launch Pill -->
-  <div id="sticky-bar" class="sticky-bar">
-    <span class="sticky-text">Start Your <em>Winter Arc</em>:</span>
-    <button onclick="handleLaunchApp(event)" class="btn-cta btn-launch-app" style="padding: 7px 16px; font-size: 12px;">
-      ▲ Launch App
-    </button>
-    <a href="https://nimratsingh217.github.io/winter-arc/" target="_blank" rel="noopener noreferrer" class="btn-cta btn-launch-web" style="padding: 7px 16px; font-size: 12px;">
-      🌐 Launch Website
-    </a>
-  </div>
-
-  <!-- App Launch / Install Helper Modal -->
-  <div id="app-modal" class="app-modal-overlay" onclick="handleOverlayClick(event)">
-    <div class="app-modal-card">
-      <button class="app-modal-close" onclick="closeAppModal()" title="Close">✕</button>
-      
-      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
-        <div style="width: 42px; height: 42px; border-radius: 12px; background: rgba(61, 214, 195, 0.15); border: 1px solid var(--accent); display: flex; align-items: center; justify-content: center; color: var(--accent); font-weight: 900; font-size: 20px;">
-          ▲
-        </div>
-        <div>
-          <h3 style="font-size: 18px; font-weight: 800; color: var(--text);">Launch 90-Day Winter Arc</h3>
-          <p style="font-size: 12px; color: var(--text-muted);">Choose your preferred launch mode</p>
-        </div>
-      </div>
-
-      <div style="display: flex; flex-direction: column; gap: 14px; margin-top: 16px;">
-        
-        <!-- Standalone Window Option -->
-        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--surface-border); border-radius: var(--radius-md); padding: 16px;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-            <div style="font-size: 14px; font-weight: 700; color: var(--text);">
-              🖥️ Standalone App Window
-            </div>
-            <span style="font-size: 10px; font-family: var(--font-mono); color: var(--accent); background: var(--accent-dim); padding: 2px 8px; border-radius: 4px;">Zero Clutter</span>
-          </div>
-          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.5;">
-            Launches in a dedicated chromeless window without browser tabs or URL bars for pure monk-mode focus.
-          </p>
-          <button onclick="openStandaloneApp()" class="btn-cta" style="width: 100%; justify-content: center; padding: 10px; font-size: 13px;">
-            Open Standalone Window ↗
-          </button>
-        </div>
-
-        <!-- Install PWA Instructions -->
-        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--surface-border); border-radius: var(--radius-md); padding: 16px;">
-          <div style="font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 8px;">
-            📱 Install as Native App to Dock / Home Screen
-          </div>
-          <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 12px; color: var(--text-muted);">
-            <li style="display: flex; align-items: flex-start; gap: 8px;">
-              <span style="color: var(--accent);">•</span>
-              <span><strong>Google Chrome (Desktop):</strong> Click the <strong>Install</strong> icon (⊕) on the right side of Chrome's address bar.</span>
-            </li>
-            <li style="display: flex; align-items: flex-start; gap: 8px;">
-              <span style="color: var(--accent);">•</span>
-              <span><strong>iPhone / iPad (Safari):</strong> Tap the <strong>Share</strong> button (□↑) and choose <strong>"Add to Home Screen"</strong>.</span>
-            </li>
-            <li style="display: flex; align-items: flex-start; gap: 8px;">
-              <span style="color: var(--accent);">•</span>
-              <span><strong>Android (Chrome):</strong> Tap the <strong>3 dots (⋮)</strong> and tap <strong>"Install App"</strong>.</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Or open in browser -->
-        <div style="text-align: center; margin-top: 4px;">
-          <a href="https://nimratsingh217.github.io/winter-arc/" target="_blank" rel="noopener noreferrer" style="font-size: 12px; color: var(--accent); text-decoration: none; font-weight: 600;">
-            Or launch website directly in Chrome tab ↗
-          </a>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <!-- Footer -->
+  <!-- Footer (Task 7: GitHub link only in footer) -->
   <footer>
     <div class="container">
       <div class="footer-wrap">
         <div>
-          <span class="footer-quote">
-            <b>Consistency</b> Over Perfection. Miss A Day, <em>Never Miss Twice</em>.
-          </span>
-          <div style="margin-top: 6px; font-size: 12px; color: var(--text-dim);">
-            Created by <a href="https://github.com/nimratsingh217" target="_blank" rel="noopener noreferrer" style="color: var(--text-muted); text-decoration: none;">Nimrat Singh</a>. Open source under MIT license.
+          <span style="font-weight: 700; color: var(--text);">90-Day Winter Arc</span> · Personal Transformation Challenge
+          <div style="font-size: 12px; color: var(--text-dim); margin-top: 4px;">
+            Starts the day you do. Open-source habit tracker.
           </div>
         </div>
 
         <ul class="footer-links">
-          <li><a href="https://nimratsingh217.github.io/winter-arc/" target="_blank" rel="noopener noreferrer">Live Tracker</a></li>
-          <li><a href="https://github.com/nimratsingh217/winter-arc" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
-          <li><a href="#features">Features</a></li>
-          <li><a href="#faq">FAQ</a></li>
+          <li><a id="footer-tracker-link" href="#">Tracker App</a></li>
+          <li><a href="https://github.com/nimratsingh217/winter-arc" target="_blank" rel="noopener noreferrer">View on GitHub</a></li>
         </ul>
       </div>
     </div>
   </footer>
 
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="lightbox-modal" onclick="closeLightbox(event)">
+    <div class="lightbox-content">
+      <button class="lightbox-close" onclick="closeLightbox()" title="Close">✕</button>
+      <img id="lightbox-img" class="lightbox-img" src="" alt="Enlarged screenshot">
+    </div>
+  </div>
+
+  <!-- Install Helper Modal (Task 7: Chrome desktop, iPhone Safari, Android Chrome) -->
+  <div id="install-modal" class="install-modal-backdrop" onclick="closeInstallModal(event)">
+    <div class="install-modal-card">
+      <button class="install-modal-close" onclick="closeInstallModal()" title="Close">✕</button>
+      
+      <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 6px;">How to Install Winter Arc</h3>
+      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">
+        Winter Arc is an installable web app that runs directly on your device.
+      </p>
+
+      <div style="display: flex; flex-direction: column; gap: 14px; font-size: 13px;">
+        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--surface-border); border-radius: var(--radius-sm); padding: 14px;">
+          <strong style="display: block; color: var(--text); margin-bottom: 4px;">Google Chrome (Desktop)</strong>
+          <span style="color: var(--text-muted);">Click the <strong>Install</strong> icon on the right side of the URL address bar.</span>
+        </div>
+
+        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--surface-border); border-radius: var(--radius-sm); padding: 14px;">
+          <strong style="display: block; color: var(--text); margin-bottom: 4px;">iPhone & iPad (Safari)</strong>
+          <span style="color: var(--text-muted);">Tap the <strong>Share</strong> button at the bottom of the screen, scroll down, and select <strong>Add to Home Screen</strong>.</span>
+        </div>
+
+        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--surface-border); border-radius: var(--radius-sm); padding: 14px;">
+          <strong style="display: block; color: var(--text); margin-bottom: 4px;">Android (Chrome)</strong>
+          <span style="color: var(--text-muted);">Tap the three-dot menu icon in the top right and select <strong>Install app</strong> or <strong>Add to Home screen</strong>.</span>
+        </div>
+      </div>
+
+      <div style="margin-top: 20px; text-align: center;">
+        <a id="modal-tracker-cta" href="#" class="btn-primary-cta" style="width: 100%;">
+          OPEN TRACKER IN BROWSER →
+        </a>
+      </div>
+    </div>
+  </div>
+
   <script>
     /* ==========================================================================
-       Interactive Hero Checklist & Solid Day Score Engine
+       GLOBAL RULES: Tracker URL Config Constant
        ========================================================================== */
-    const checkRows = document.querySelectorAll('.check-row');
-    const checkedCounter = document.getElementById('checked-counter');
-    const demoProgressCircle = document.getElementById('demo-progress-circle');
-    const demoPercentage = document.getElementById('demo-percentage');
-    const demoStatusBadge = document.getElementById('demo-status-badge');
-    const demoStatusDesc = document.getElementById('demo-status-desc');
+    const TRACKER_URL = "https://nimratsingh217.github.io/winter-arc/";
 
-    const TOTAL_CHECKS = checkRows.length;
-    let checkedCount = 0;
-
-    checkRows.forEach((row) => {
-      row.addEventListener('click', () => {
-        row.classList.toggle('checked');
-        updateDemoScore();
-        playTickSound(row.classList.contains('checked'));
-      });
+    // Wire every CTA to TRACKER_URL
+    const ctaIds = [
+      "nav-cta",
+      "hero-cta",
+      "gallery-cta",
+      "final-cta",
+      "footer-tracker-link",
+      "modal-tracker-cta"
+    ];
+    ctaIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.href = TRACKER_URL;
+        el.target = "_blank";
+        el.rel = "noopener noreferrer";
+      }
     });
 
-    function updateDemoScore() {
-      checkedCount = document.querySelectorAll('.check-row.checked').length;
-      checkedCounter.textContent = `${checkedCount} / ${TOTAL_CHECKS} Complete`;
-
-      const pct = Math.round((checkedCount / TOTAL_CHECKS) * 100);
-      demoPercentage.textContent = pct;
-
-      // Circle stroke-dashoffset: 339 is full circumference
-      const offset = 339 - (339 * pct) / 100;
-      demoProgressCircle.style.strokeDashoffset = offset;
-
-      if (pct >= 75) {
-        demoStatusBadge.textContent = '★ SOLID DAY ACHIEVED';
-        demoStatusBadge.className = 'status-badge solid';
-        demoStatusDesc.innerHTML = 'Outstanding execution. You crossed the 75% threshold to lock in a <strong>SOLID DAY</strong> on your 90-day board.';
-      } else if (pct >= 50) {
-        demoStatusBadge.textContent = 'Building Momentum';
-        demoStatusBadge.className = 'status-badge';
-        demoStatusDesc.innerHTML = 'Good progress. Check off ' + (Math.ceil(TOTAL_CHECKS * 0.75) - checkedCount) + ' more item(s) to convert this into a <strong>Solid Day</strong>.';
-      } else {
-        demoStatusBadge.textContent = 'Incomplete Day';
-        demoStatusBadge.className = 'status-badge';
-        demoStatusDesc.innerHTML = 'Tap tasks above to simulate your daily log. Reach 75%+ to trigger a <strong>SOLID DAY</strong> victory state.';
+    /* ==========================================================================
+       Task 11: The Film Injector
+       ========================================================================== */
+    function startFilm() {
+      const poster = document.getElementById('film-poster');
+      const slot = document.getElementById('film-slot');
+      if (poster && slot) {
+        poster.style.display = 'none';
+        slot.innerHTML = '<iframe class="film-iframe" src="assets/winter-arc-ad.html" allow="autoplay; fullscreen" loading="lazy" title="Winter Arc 35-second film"></iframe>';
       }
     }
 
     /* ==========================================================================
-       Web Audio API - Procedural Audio (Chimes & Ambient Soundscape)
+       Task 10: Gallery Tabs & Lightbox
+       ========================================================================== */
+    const galleryTabs = document.querySelectorAll('.gallery-tab');
+    const galleryMainImg = document.getElementById('gallery-main-img');
+    const galleryCaptionText = document.getElementById('gallery-caption-text');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+
+    galleryTabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        galleryTabs.forEach((t) => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        const imgSrc = tab.getAttribute('data-img');
+        const cap = tab.getAttribute('data-cap');
+
+        if (galleryMainImg) {
+          galleryMainImg.src = imgSrc;
+          galleryMainImg.alt = cap;
+        }
+        if (galleryCaptionText) {
+          galleryCaptionText.textContent = cap;
+        }
+      });
+    });
+
+    function openLightbox() {
+      if (lightbox && lightboxImg && galleryMainImg) {
+        lightboxImg.src = galleryMainImg.src;
+        lightboxImg.alt = galleryMainImg.alt;
+        lightbox.classList.add('active');
+      }
+    }
+
+    function closeLightbox(e) {
+      if (!e || e.target === lightbox || e.target.classList.contains('lightbox-close')) {
+        if (lightbox) lightbox.classList.remove('active');
+      }
+    }
+
+    /* ==========================================================================
+       Install Modal Controller
+       ========================================================================== */
+    const installModal = document.getElementById('install-modal');
+
+    function openInstallModal() {
+      if (installModal) installModal.classList.add('active');
+    }
+
+    function closeInstallModal(e) {
+      if (!e || e.target === installModal || e.target.classList.contains('install-modal-close')) {
+        if (installModal) installModal.classList.remove('active');
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeLightbox();
+        closeInstallModal();
+      }
+    });
+
+    /* ==========================================================================
+       Point 1: Playable Monster Arena Demo Logic & Retro SFX (Point 7)
        ========================================================================== */
     let audioCtx = null;
-    let isPlayingAmbient = false;
-    let ambientInterval = null;
+    let soundEnabled = true;
 
     function getAudioCtx() {
       if (!audioCtx) {
@@ -2162,7 +1983,8 @@
       return audioCtx;
     }
 
-    function playTickSound(isChecked) {
+    function playHitSound(isCrit) {
+      if (!soundEnabled) return;
       try {
         const ctx = getAudioCtx();
         const osc = ctx.createOscillator();
@@ -2171,291 +1993,154 @@
         gain.connect(ctx.destination);
 
         const now = ctx.currentTime;
-        if (isChecked) {
-          // Upward cheerful chime
-          osc.frequency.setValueAtTime(440, now);
-          osc.frequency.exponentialRampToValueAtTime(880, now + 0.12);
-          gain.gain.setValueAtTime(0.12, now);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+        if (isCrit) {
+          // Retro victory chime
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(523.25, now); // C5
+          osc.frequency.setValueAtTime(659.25, now + 0.1); // E5
+          osc.frequency.setValueAtTime(783.99, now + 0.2); // G5
+          osc.frequency.setValueAtTime(1046.50, now + 0.3); // C6
+          gain.gain.setValueAtTime(0.15, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+          osc.start(now);
+          osc.stop(now + 0.52);
         } else {
-          // Low tap
-          osc.frequency.setValueAtTime(320, now);
-          osc.frequency.exponentialRampToValueAtTime(220, now + 0.08);
-          gain.gain.setValueAtTime(0.08, now);
+          // Quick retro slash tap
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(400, now);
+          osc.frequency.exponentialRampToValueAtTime(160, now + 0.09);
+          gain.gain.setValueAtTime(0.1, now);
           gain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+          osc.start(now);
+          osc.stop(now + 0.11);
+        }
+      } catch (e) {}
+    }
+
+    const soundBtn = document.getElementById('sound-btn');
+    if (soundBtn) {
+      soundBtn.addEventListener('click', () => {
+        soundEnabled = !soundEnabled;
+        soundBtn.classList.toggle('playing', soundEnabled);
+        document.getElementById('sound-icon').textContent = soundEnabled ? '🔊' : '🔇';
+        document.getElementById('sound-label').textContent = soundEnabled ? 'Sound' : 'Muted';
+      });
+    }
+
+    const arenaItems = document.querySelectorAll('.check-item-arena');
+    const monsterHpFill = document.getElementById('monster-hp-fill');
+    const monsterHpText = document.getElementById('monster-hp-text');
+    const monsterStatusNote = document.getElementById('monster-status-note');
+    const arenaCounter = document.getElementById('arena-counter');
+    const monsterBox = document.getElementById('monster-box');
+
+    let currentDamage = 0;
+
+    arenaItems.forEach((item) => {
+      item.addEventListener('click', () => {
+        item.classList.toggle('checked');
+        const dmg = parseInt(item.getAttribute('data-damage'), 10) || 16;
+        
+        if (item.classList.contains('checked')) {
+          currentDamage += dmg;
+          playHitSound(false);
+          if (monsterBox) {
+            monsterBox.style.transform = 'scale(0.92)';
+            setTimeout(() => { monsterBox.style.transform = 'scale(1)'; }, 100);
+          }
+        } else {
+          currentDamage = Math.max(0, currentDamage - dmg);
         }
 
-        osc.start(now);
-        osc.stop(now + 0.16);
-      } catch (e) {
-        // Audio forbidden before user gesture
-      }
-    }
+        const checkedCount = document.querySelectorAll('.check-item-arena.checked').length;
+        arenaCounter.textContent = `${checkedCount} / ${arenaItems.length} Completed`;
 
-    // Procedural Ambient Synthesizer (Icy pads & bell chord progression)
-    const soundBtn = document.getElementById('sound-btn');
-    const soundIcon = document.getElementById('sound-icon');
-    const soundLabel = document.getElementById('sound-label');
+        const remainingHp = Math.max(0, 100 - currentDamage);
+        monsterHpFill.style.width = remainingHp + '%';
+        monsterHpText.textContent = `Monster HP: ${remainingHp}%`;
 
-    const chords = [
-      [57, 60, 64], // Am
-      [53, 57, 60], // F
-      [48, 52, 55], // C
-      [55, 59, 62]  // G
-    ];
-    let chordIdx = 0;
-
-    const midiToFreq = (m) => 440 * Math.pow(2, (m - 69) / 12);
-
-    function playAmbientChord() {
-      if (!isPlayingAmbient) return;
-      const ctx = getAudioCtx();
-      const chord = chords[chordIdx % chords.length];
-      chordIdx++;
-
-      const now = ctx.currentTime;
-      const duration = 4.0;
-
-      // Lush synth pad
-      chord.forEach((note) => {
-        [-4, 4].forEach((detune) => {
-          const osc = ctx.createOscillator();
-          const filter = ctx.createBiquadFilter();
-          const gain = ctx.createGain();
-
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(midiToFreq(note), now);
-          osc.detune.setValueAtTime(detune, now);
-
-          filter.type = 'lowpass';
-          filter.frequency.setValueAtTime(450, now);
-          filter.frequency.linearRampToValueAtTime(900, now + 1.8);
-          filter.frequency.linearRampToValueAtTime(450, now + duration);
-
-          gain.gain.setValueAtTime(0, now);
-          gain.gain.linearRampToValueAtTime(0.035, now + 1.2);
-          gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
-
-          osc.connect(filter);
-          filter.connect(gain);
-          gain.connect(ctx.destination);
-
-          osc.start(now);
-          osc.stop(now + duration);
-        });
+        if (remainingHp <= 0) {
+          playHitSound(true);
+          monsterHpText.textContent = 'MONSTER DEFEATED';
+          monsterHpText.style.color = 'var(--accent)';
+          monsterStatusNote.innerHTML = '<strong style="color:var(--accent);">Victory!</strong> Daily monster defeated (+1 trophy on The Summit).';
+        } else {
+          monsterHpText.style.color = '';
+          monsterStatusNote.textContent = 'Tick habits to damage the monster. Complete your selected habits to defeat it.';
+        }
       });
+    });
 
-      // Clear Bell Strike
-      const bellNote = chord[Math.floor(Math.random() * chord.length)] + 12;
-      const bellOsc = ctx.createOscillator();
-      const bellGain = ctx.createGain();
-      bellOsc.type = 'triangle';
-      bellOsc.frequency.setValueAtTime(midiToFreq(bellNote), now + 0.4);
+    /* ==========================================================================
+       Point 2: Scroll-Driven Summit Ascent Tracker
+       ========================================================================== */
+    const summitHiker = document.getElementById('summit-hiker');
+    const summitHikerLabel = document.getElementById('summit-hiker-label');
 
-      bellGain.gain.setValueAtTime(0, now + 0.4);
-      bellGain.gain.linearRampToValueAtTime(0.04, now + 0.45);
-      bellGain.gain.exponentialRampToValueAtTime(0.0001, now + 3.0);
+    window.addEventListener('scroll', () => {
+      if (!summitHiker) return;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (docHeight <= 0) return;
+      
+      const scrollPct = Math.min(1, Math.max(0, window.scrollY / docHeight));
+      // Invert so hiker climbs from bottom (Day 1) to top (Day 90)
+      const topPct = (1 - scrollPct) * 100;
+      summitHiker.style.top = topPct + '%';
 
-      bellOsc.connect(bellGain);
-      bellGain.connect(ctx.destination);
-      bellOsc.start(now + 0.4);
-      bellOsc.stop(now + 3.2);
-    }
-
-    soundBtn.addEventListener('click', () => {
-      isPlayingAmbient = !isPlayingAmbient;
-      if (isPlayingAmbient) {
-        getAudioCtx();
-        soundBtn.classList.add('playing');
-        soundIcon.textContent = '🔊';
-        soundLabel.textContent = 'Playing Ambient';
-        playAmbientChord();
-        ambientInterval = setInterval(playAmbientChord, 3800);
-      } else {
-        soundBtn.classList.remove('playing');
-        soundIcon.textContent = '🔇';
-        soundLabel.textContent = 'Sound Ambient';
-        clearInterval(ambientInterval);
+      const dayNum = Math.min(90, Math.max(1, Math.round(scrollPct * 89) + 1));
+      if (summitHikerLabel) {
+        if (dayNum >= 90) {
+          summitHikerLabel.textContent = 'Summit (D90)';
+        } else if (dayNum >= 60) {
+          summitHikerLabel.textContent = `Camp 2 (D${dayNum})`;
+        } else if (dayNum >= 30) {
+          summitHikerLabel.textContent = `Camp 1 (D${dayNum})`;
+        } else {
+          summitHikerLabel.textContent = `Day ${dayNum}`;
+        }
       }
     });
 
     /* ==========================================================================
-       Procedural 3D Summit Simulator Canvas
+       Point 4: Personalized Plan Generator Card
        ========================================================================== */
-    const summitCanvas = document.getElementById('summit-canvas');
-    if (summitCanvas) {
-      const ctx = summitCanvas.getContext('2d');
-      let width = (summitCanvas.width = summitCanvas.offsetWidth || 500);
-      let height = (summitCanvas.height = 240);
-      let mouseX = width / 2;
+    const planNameInput = document.getElementById('plan-name');
+    const planFocusInput = document.getElementById('plan-focus');
+    const cardName = document.getElementById('card-name');
+    const cardFocus = document.getElementById('card-focus');
 
-      window.addEventListener('resize', () => {
-        if (!summitCanvas) return;
-        width = summitCanvas.width = summitCanvas.offsetWidth;
-        height = summitCanvas.height = 240;
-      });
-
-      summitCanvas.addEventListener('mousemove', (e) => {
-        const rect = summitCanvas.getBoundingClientRect();
-        mouseX = e.clientX - rect.left;
-      });
-
-      function drawSummitScene(time) {
-        ctx.clearRect(0, 0, width, height);
-
-        // Sky gradient
-        const sky = ctx.createLinearGradient(0, 0, 0, height);
-        sky.addColorStop(0, '#091322');
-        sky.addColorStop(0.65, '#12253e');
-        sky.addColorStop(1, '#1b3b55');
-        ctx.fillStyle = sky;
-        ctx.fillRect(0, 0, width, height);
-
-        // Stars / Snow particles
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
-        for (let i = 0; i < 40; i++) {
-          const sx = (i * 37 + time * 0.015) % width;
-          const sy = (i * 23) % (height * 0.6);
-          ctx.beginPath();
-          ctx.arc(sx, sy, (i % 3 === 0 ? 1.5 : 0.8), 0, Math.PI * 2);
-          ctx.fill();
-        }
-
-        // Parallax Mountain Layers
-        const pan = (mouseX / width - 0.5) * 35;
-
-        // Distant Ridge (Deep Cyan)
-        drawRidge(ctx, width, height, 0.45, 75, '#0c1b2c', pan * 0.3);
-
-        // Mid Ridge (Dark Alpine)
-        drawRidge(ctx, width, height, 0.6, 95, '#0e2439', pan * 0.6);
-
-        // Foreground Summit Peak (Icy Teal Crest)
-        ctx.beginPath();
-        ctx.moveTo(0, height);
-        ctx.lineTo(0, height * 0.7);
-        ctx.lineTo(width * 0.45 + pan, height * 0.28);
-        ctx.lineTo(width * 0.5 + pan, height * 0.3);
-        ctx.lineTo(width, height * 0.75);
-        ctx.lineTo(width, height);
-        ctx.closePath();
-        ctx.fillStyle = '#060f1c';
-        ctx.fill();
-
-        // Glowing Snow Ridge / Icy highlight
-        ctx.beginPath();
-        ctx.moveTo(width * 0.2 + pan * 0.8, height * 0.52);
-        ctx.lineTo(width * 0.45 + pan, height * 0.28);
-        ctx.lineTo(width * 0.75 + pan * 1.1, height * 0.6);
-        ctx.strokeStyle = '#3dd6c3';
-        ctx.lineWidth = 2.5;
-        ctx.shadowColor = '#3dd6c3';
-        ctx.shadowBlur = 15;
-        ctx.stroke();
-        ctx.shadowBlur = 0;
-
-        requestAnimationFrame(drawSummitScene);
+    function updatePlanCard() {
+      if (cardName && planNameInput) {
+        cardName.textContent = planNameInput.value.trim() || 'Participant';
       }
-
-      function drawRidge(ctx, w, h, baseRatio, variance, color, shift) {
-        ctx.beginPath();
-        ctx.moveTo(0, h);
-        ctx.lineTo(0, h * baseRatio);
-        const steps = 8;
-        for (let i = 1; i <= steps; i++) {
-          const x = (w / steps) * i;
-          const y = h * baseRatio + Math.sin(i * 1.2 + shift * 0.05) * variance * 0.3;
-          ctx.lineTo(x + shift, y);
-        }
-        ctx.lineTo(w, h);
-        ctx.closePath();
-        ctx.fillStyle = color;
-        ctx.fill();
+      if (cardFocus && planFocusInput) {
+        cardFocus.textContent = planFocusInput.value.trim() || 'General Consistency';
       }
-
-      requestAnimationFrame(drawSummitScene);
     }
+
+    if (planNameInput) planNameInput.addEventListener('input', updatePlanCard);
+    if (planFocusInput) planFocusInput.addEventListener('input', updatePlanCard);
 
     /* ==========================================================================
-       Interactive Stopwatch Widget Simulator
-       ========================================================================== */
-    const swClock = document.getElementById('demo-sw-clock');
-    const swToggle = document.getElementById('demo-sw-toggle');
-    const swReset = document.getElementById('demo-sw-reset');
-
-    let swSeconds = 45 * 60 + 12;
-    let swInterval = null;
-    let swRunning = false;
-
-    function formatTime(s) {
-      const hrs = String(Math.floor(s / 3600)).padStart(2, '0');
-      const mins = String(Math.floor((s % 3600) / 60)).padStart(2, '0');
-      const secs = String(s % 60).padStart(2, '0');
-      return `${hrs}:${mins}:${secs}`;
-    }
-
-    if (swToggle) {
-      swToggle.addEventListener('click', () => {
-        swRunning = !swRunning;
-        if (swRunning) {
-          swToggle.textContent = 'Pause';
-          swToggle.style.background = 'var(--accent)';
-          swToggle.style.color = '#050811';
-          swInterval = setInterval(() => {
-            swSeconds++;
-            swClock.textContent = formatTime(swSeconds);
-          }, 1000);
-        } else {
-          swToggle.textContent = 'Resume';
-          swToggle.style.background = 'transparent';
-          swToggle.style.color = 'var(--accent)';
-          clearInterval(swInterval);
-        }
-      });
-
-      swReset.addEventListener('click', () => {
-        swRunning = false;
-        clearInterval(swInterval);
-        swSeconds = 0;
-        swClock.textContent = formatTime(swSeconds);
-        swToggle.textContent = 'Start';
-        swToggle.style.background = 'transparent';
-        swToggle.style.color = 'var(--accent)';
-      });
-    }
-
-    /* ==========================================================================
-       FAQ Accordion Logic
+       FAQ Accordion
        ========================================================================== */
     const faqItems = document.querySelectorAll('.faq-item');
     faqItems.forEach((item) => {
       const q = item.querySelector('.faq-question');
-      q.addEventListener('click', () => {
-        const isActive = item.classList.contains('active');
-        faqItems.forEach((other) => other.classList.remove('active'));
-        if (!isActive) {
-          item.classList.add('active');
-        }
-      });
-    });
-
-    /* ==========================================================================
-       Sticky Launch Bar on Scroll
-       ========================================================================== */
-    const stickyBar = document.getElementById('sticky-bar');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 450) {
-        stickyBar.classList.add('visible');
-      } else {
-        stickyBar.classList.remove('visible');
+      if (q) {
+        q.addEventListener('click', () => {
+          const isActive = item.classList.contains('active');
+          faqItems.forEach((other) => other.classList.remove('active'));
+          if (!isActive) item.classList.add('active');
+        });
       }
     });
 
     /* ==========================================================================
-       Ambient Canvas Snowfall Particle System
+       Ambient Canvas Snowfall
        ========================================================================== */
     const bgCanvas = document.getElementById('bg-canvas');
-    if (bgCanvas) {
+    if (bgCanvas && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       const bgCtx = bgCanvas.getContext('2d');
       let w = (bgCanvas.width = window.innerWidth);
       let h = (bgCanvas.height = window.innerHeight);
@@ -2465,13 +2150,13 @@
         h = bgCanvas.height = window.innerHeight;
       });
 
-      const flakes = Array.from({ length: 65 }, () => ({
+      const flakes = Array.from({ length: 45 }, () => ({
         x: Math.random() * w,
         y: Math.random() * h,
-        radius: Math.random() * 1.6 + 0.4,
-        speedY: Math.random() * 0.7 + 0.3,
-        speedX: (Math.random() - 0.5) * 0.3,
-        opacity: Math.random() * 0.6 + 0.2
+        radius: Math.random() * 1.5 + 0.5,
+        speedY: Math.random() * 0.5 + 0.25,
+        speedX: (Math.random() - 0.5) * 0.2,
+        opacity: Math.random() * 0.4 + 0.15
       }));
 
       function renderSnow() {
@@ -2480,84 +2165,19 @@
           f.y += f.speedY;
           f.x += f.speedX;
 
-          if (f.y > h) {
-            f.y = -5;
-            f.x = Math.random() * w;
-          }
+          if (f.y > h) { f.y = -5; f.x = Math.random() * w; }
           if (f.x > w) f.x = 0;
           if (f.x < 0) f.x = w;
 
           bgCtx.beginPath();
           bgCtx.arc(f.x, f.y, f.radius, 0, Math.PI * 2);
-          bgCtx.fillStyle = `rgba(215, 235, 255, ${f.opacity})`;
+          bgCtx.fillStyle = `rgba(200, 225, 255, ${f.opacity})`;
           bgCtx.fill();
         });
-
         requestAnimationFrame(renderSnow);
       }
-
       requestAnimationFrame(renderSnow);
     }
-
-    /* ==========================================================================
-       App Launch & Installation Controller
-       ========================================================================== */
-    let deferredPrompt = null;
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-    });
-
-    const appModal = document.getElementById('app-modal');
-
-    function handleLaunchApp(e) {
-      if (e) e.preventDefault();
-      
-      // If native PWA install prompt is available, trigger it
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then((choiceResult) => {
-          if (choiceResult.outcome === 'accepted') {
-            deferredPrompt = null;
-          } else {
-            openAppModal();
-          }
-        });
-      } else {
-        openAppModal();
-      }
-    }
-
-    function openAppModal() {
-      if (appModal) appModal.classList.add('active');
-    }
-
-    function closeAppModal() {
-      if (appModal) appModal.classList.remove('active');
-    }
-
-    function handleOverlayClick(e) {
-      if (e.target === appModal) {
-        closeAppModal();
-      }
-    }
-
-    function openStandaloneApp() {
-      closeAppModal();
-      const url = 'https://nimratsingh217.github.io/winter-arc/';
-      const win = window.open(
-        url,
-        'WinterArcPWA',
-        'width=1280,height=850,menubar=no,toolbar=no,location=no,status=no,resizable=yes,scrollbars=yes'
-      );
-      if (!win) {
-        window.open(url, '_blank');
-      }
-    }
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeAppModal();
-    });
   </script>
 </body>
 </html>

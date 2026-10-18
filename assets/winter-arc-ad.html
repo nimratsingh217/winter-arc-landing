@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>90-Day Winter Arc – Film</title>
+<style>
+:root{--bg:#070b14;--fg:#eaf4ff;--ac:#7fd4ff;--mu:#7d8ba3;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#070b14;--fg:#eaf4ff}}
+html,body{height:100%;margin:0;background:#000;font-family:"Helvetica Neue",Arial,sans-serif;color:var(--fg)}
+body{display:flex;align-items:center;justify-content:center}
+#stage{position:relative;width:min(100vw,177.78vh);aspect-ratio:16/9;container-type:size;background:radial-gradient(circle at 50% 20%,#14223d,var(--bg) 70%);overflow:hidden}
+.snow{position:absolute;inset:0;pointer-events:none}
+.snow i{position:absolute;top:-5%;width:4px;height:4px;border-radius:50%;background:#fff;opacity:.6;animation:fall linear infinite}
+@keyframes fall{to{transform:translateY(115vh)}}
+.scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:5%;opacity:0;transform:scale(.96);transition:opacity .6s,transform .8s}
+.scene.on{opacity:1;transform:scale(1)}
+.big{font-size:15cqh;font-weight:900;letter-spacing:-1px;line-height:1.05;margin:0}
+.big em{font-style:normal;color:var(--ac)}
+.sm{font-size:3cqh;letter-spacing:.6cqh;color:var(--mu);margin-top:3.5cqh;text-transform:uppercase}
+.list{list-style:none;padding:0;margin:3cqh 0 0;width:100%;text-align:left}
+.scene.row{flex-direction:row;gap:6cqw;text-align:left}.row h2{flex:1}.row .list,.row .grid{flex:1;margin-top:0}
+.list li{display:flex;align-items:center;gap:2cqh;font-size:4.6cqh;font-weight:700;padding:1.6cqh 0;opacity:0;transform:translateX(-20px);transition:.5s}
+.list li b{width:5cqh;height:5cqh;border:2px solid var(--ac);border-radius:7px;display:grid;place-items:center;color:var(--bg);font-size:3.4cqh;transition:.3s}
+.list li.t b{background:var(--ac)}
+.list li.s{opacity:1;transform:none}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:2cqh;margin-top:3cqh;width:100%}
+.grid div{border:1px solid #27385a;border-radius:14px;padding:3cqh 1cqw;background:#0e1a30;opacity:0;transform:translateY(20px);transition:.6s}
+.grid div.s{opacity:1;transform:none}
+.grid strong{display:block;font-size:7.5cqh;color:var(--ac)}
+.grid span{font-size:2.2cqh;color:var(--mu);letter-spacing:2px;text-transform:uppercase}
+.cta{margin-top:4cqh;padding:2cqh 4cqh;border-radius:40px;background:var(--ac);color:#06101f;font-weight:800;font-size:3.6cqh;word-break:break-all}
+#bar{position:absolute;left:0;bottom:0;height:4px;background:var(--ac);width:0}
+#replay{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:12px;background:#ffffff18;color:#fff;border:0;border-radius:20px;padding:8px 14px;font-size:13px;cursor:pointer}
+#start{position:absolute;inset:0;z-index:5;background:#070bd0;background:rgba(7,11,20,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;cursor:pointer;text-align:center;padding:10%}#start .big{font-size:11cqh}#start button{margin-top:10px;padding:14px 28px;border-radius:40px;border:0;background:var(--ac);color:#06101f;font-weight:800;font-size:18px}#mute{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));left:12px;background:#ffffff18;color:#fff;border:0;border-radius:20px;padding:8px 14px;font-size:13px;cursor:pointer}#cap{position:absolute;left:6%;right:6%;bottom:calc(8% + env(safe-area-inset-bottom,0px));text-align:center;font-size:clamp(13px,3.8vw,17px);font-weight:600;line-height:1.35;color:#fff;text-shadow:0 2px 8px #000;opacity:0;transition:opacity .4s;pointer-events:none}</style></head><body>
+<div id="stage">
+<div class="snow" id="snow"></div>
+<button id="mute">🔊 Sound on</button>
+<div id="start"><h1 class="big">90-Day <em>Winter Arc</em></h1><p class="sm">Best with sound on</p><button>▶ Play ad</button></div>
+<button id="replay">↻ Replay</button>
+
+<div class="scene" data-d="4000"><p class="sm">Your next 90 days</p><h1 class="big">Day <em>1</em>.</h1><p class="sm">Nobody's watching. Start anyway.</p></div>
+
+<div class="scene" data-d="3500"><h1 class="big">90 days.<br><em>One tracker.</em></h1><p class="sm">The 90-Day Winter Arc</p></div>
+
+<div class="scene row" data-d="6500"><h2 class="big" style="font-size:11cqh">Tick it. <em>Every day.</em></h2>
+<ul class="list" id="l1"><li><b>✓</b>Breakfast &amp; protein</li><li><b>✓</b>Water 2.5–3 L</li><li><b>✓</b>Gym or rest</li><li><b>✓</b>Skin &amp; discipline</li><li><b>✓</b>DSA &amp; career</li></ul></div>
+
+<div class="scene row" data-d="5500"><h2 class="big" style="font-size:11cqh">Your daily <em>targets</em></h2>
+<div class="grid" id="g1"><div><strong>2,500</strong><span>kcal</span></div><div><strong>100g+</strong><span>protein</span></div><div><strong>2.5–3L</strong><span>water</span></div><div><strong>4–5×</strong><span>gym / week</span></div></div></div>
+
+<div class="scene" data-d="4200"><p class="sm">Streaks · Weekly review · Weight</p><h1 class="big" style="margin-top:2cqh">Watch the grid<br><em>fill up.</em></h1><p class="sm">Light &amp; dark mode · Export / Import</p></div>
+
+<div class="scene" data-d="4800"><h1 class="big">Consistency<br>over <em>perfection.</em></h1><p class="sm">Miss a day, never miss twice.</p></div>
+
+<div class="scene" data-d="7000"><h1 class="big">Day 90<br><em>The finish line.</em></h1><p class="sm">Who will you be?</p><div class="cta">nimratsingh217.github.io/winter-arc</div></div>
+
+<div id="bar"></div>
+</div>
+<script>
+const snow=document.getElementById('snow');
+for(let i=0;i<40;i++){const e=document.createElement('i');e.style.left=Math.random()*100+'%';e.style.animationDuration=(5+Math.random()*7)+'s';e.style.animationDelay=(-Math.random()*10)+'s';e.style.width=e.style.height=(2+Math.random()*4)+'px';snow.appendChild(e)}
+const sc=[...document.querySelectorAll('.scene')],bar=document.getElementById('bar');
+const total=sc.reduce((a,s)=>a+ +s.dataset.d,0);
+const VO=["Day one. Nobody's watching. Start anyway.","Ninety days. One tracker. The Winter Arc.","Tick it. Every single day. Food. Water. Gym. Skin. Discipline. And the work that builds your future.","Twenty-five hundred calories. A hundred grams of protein. Three litres of water. And the gym, four to five times a week.","Watch the grid fill up. Streaks. Weekly reviews. Every day counts.","Consistency... over perfection. Miss a day? Fine. Never miss twice.","Day ninety. Who will you be? Start your Winter Arc, today."];
+const TTS=(()=>{try{return typeof speechSynthesis!=='undefined'&&typeof SpeechSynthesisUtterance!=='undefined'}catch(e){return false}})();
+let timers=[],muted=false,ac=null,master=null,musicTimer=null,voice=null;
+
+/* ---------- VOICE ---------- */
+function pickVoice(){
+  if(!TTS)return;try{
+  const v=speechSynthesis.getVoices().filter(x=>/^en/i.test(x.lang));
+  const pref=[/Google UK English Male/i,/Daniel/i,/Aaron/i,/Alex/i,/Arthur/i,/Fred/i,/Rishi/i,/David/i,/Mark/i,/Guy/i,/male/i];
+  for(const r of pref){const f=v.find(x=>r.test(x.name));if(f){voice=f;return}}
+  voice=v[0]||null;
+  }catch(e){}
+}
+if(TTS){try{pickVoice();speechSynthesis.onvoiceschanged=pickVoice}catch(e){}}
+function say(txt){}
+
+/* ---------- MUSIC (synthesised: icy cinematic pad + bells + heartbeat) ---------- */
+const chords=[[57,60,64],[53,57,60],[48,52,55],[55,59,62]]; // Am F C G
+const hz=m=>440*Math.pow(2,(m-69)/12);
+function env(g,t,a,d,pk){g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(pk,t+a);g.gain.exponentialRampToValueAtTime(.0001,t+a+d)}
+function pad(notes,t,len){
+  notes.forEach(n=>{[-6,6].forEach(det=>{
+    const o=ac.createOscillator(),f=ac.createBiquadFilter(),g=ac.createGain();
+    o.type='sawtooth';o.frequency.value=hz(n);o.detune.value=det;
+    f.type='lowpass';f.frequency.value=700;
+    g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.05,t+len*.45);g.gain.linearRampToValueAtTime(0,t+len+.3);
+    o.connect(f);f.connect(g);g.connect(master);o.start(t);o.stop(t+len+.4);
+  })});
+  const b=ac.createOscillator(),bg=ac.createGain();b.type='sine';b.frequency.value=hz(notes[0]-24);
+  bg.gain.setValueAtTime(0,t);bg.gain.linearRampToValueAtTime(.22,t+.8);bg.gain.linearRampToValueAtTime(0,t+len+.3);
+  b.connect(bg);bg.connect(master);b.start(t);b.stop(t+len+.4);
+}
+function bell(n,t,v){
+  const o=ac.createOscillator(),g=ac.createGain();o.type='triangle';o.frequency.value=hz(n);
+  env(g,t,.01,1.4,v);o.connect(g);g.connect(master);g.connect(delayIn);o.start(t);o.stop(t+1.6);
+}
+function thump(t,v){
+  const o=ac.createOscillator(),g=ac.createGain();o.type='sine';
+  o.frequency.setValueAtTime(110,t);o.frequency.exponentialRampToValueAtTime(40,t+.25);
+  env(g,t,.005,.35,v);o.connect(g);g.connect(master);o.start(t);o.stop(t+.5);
+}
+let delayIn;
+function musicStart(){
+  if(muted)return;
+  try{
+  if(!ac)ac=new (window.AudioContext||window.webkitAudioContext)();
+  ac.resume();
+  master=ac.createGain();master.gain.value=0;master.connect(ac.destination);
+  master.gain.linearRampToValueAtTime(.55,ac.currentTime+2);
+  const d=ac.createDelay(1);d.delayTime.value=.375;const fb=ac.createGain();fb.gain.value=.4;
+  delayIn=ac.createGain();delayIn.gain.value=.5;delayIn.connect(d);d.connect(fb);fb.connect(d);d.connect(master);
+  const t0=ac.currentTime+.1,bar=4,beat=.5;let step=0;
+  const sched=()=>{
+    while(true){
+      const t=t0+step*beat*2; // each step = 1s
+      if(t>ac.currentTime+1.5)break;
+      const sec=step,ci=Math.floor(sec/bar)%4,ch=chords[ci];
+      if(sec%bar===0)pad(ch,t,bar);
+      // icy arpeggio (every half-second), enters after 3s
+      if(sec>=3){bell(ch[sec%3]+24,t,.07);bell(ch[(sec+1)%3]+31,t+.5,.045)}
+      // heartbeat enters around the tracker scene, grows toward end
+      if(sec>=7){thump(t,sec>=22?.5:.3);if(sec>=14)thump(t+.5,.18)}
+      // riser into the finale
+      if(sec===27){const o=ac.createOscillator(),g=ac.createGain();o.type='sawtooth';o.frequency.setValueAtTime(200,t);o.frequency.exponentialRampToValueAtTime(1600,t+4);
+        const f=ac.createBiquadFilter();f.type='lowpass';f.frequency.value=2000;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.05,t+3.8);g.gain.linearRampToValueAtTime(0,t+4.3);o.connect(f);f.connect(g);g.connect(master);o.start(t);o.stop(t+4.4)}
+      step++;
+    }
+  };
+  sched();musicTimer=setInterval(sched,400);
+  }catch(e){}
+}
+function musicStop(){
+  clearInterval(musicTimer);
+  if(master&&ac){const m=master;m.gain.cancelScheduledValues(ac.currentTime);m.gain.setValueAtTime(m.gain.value,ac.currentTime);m.gain.linearRampToValueAtTime(0,ac.currentTime+.8);setTimeout(()=>{try{m.disconnect()}catch(e){}},1000)}
+}
+
+/* ---------- TIMELINE ---------- */
+function later(f,t){timers.push(setTimeout(f,t))}
+function play(){
+  timers.forEach(clearTimeout);timers=[];
+  if(TTS)try{speechSynthesis.cancel()}catch(e){}
+  musicStop();
+  document.querySelectorAll('.s,.t').forEach(e=>e.classList.remove('s','t'));
+  sc.forEach(s=>s.classList.remove('on'));
+  bar.style.transition='none';bar.style.width='0';
+  later(()=>{bar.style.transition='width '+total+'ms linear';bar.style.width='100%'},50);
+  later(musicStart,80);
+  let t=0;
+  sc.forEach((s,i)=>{
+    later(()=>{sc.forEach(x=>x.classList.remove('on'));s.classList.add('on');
+      later(()=>say(VO[i]),500);
+      if(i==2)document.querySelectorAll('#l1 li').forEach((li,k)=>{later(()=>li.classList.add('s'),k*600);later(()=>li.classList.add('t'),k*600+450)});
+      if(i==3)document.querySelectorAll('#g1 div').forEach((d,k)=>later(()=>d.classList.add('s'),k*600));
+    },t);
+    t+= +s.dataset.d;
+  });
+  later(()=>{musicStop()},t+300);
+  later(play,t+1800);
+}
+document.getElementById('replay').onclick=play;
+document.getElementById('mute').onclick=function(){
+  muted=!muted;this.textContent=muted?'🔇 Sound off':'🔊 Sound on';
+  if(muted){if(TTS)try{speechSynthesis.cancel()}catch(e){};musicStop()}else{musicStart()}
+};
+document.getElementById('start').onclick=function(){
+  this.remove();
+  try{if(!ac)ac=new (window.AudioContext||window.webkitAudioContext)();ac.resume()}catch(e){}
+  try{pickVoice()}catch(e){}
+  play();
+};
+</script>
+</body></html>
